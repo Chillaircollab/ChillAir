@@ -28,26 +28,33 @@ function initNavigation() {
     const newNavToggle = navToggle.cloneNode(true);
     navToggle.parentNode.replaceChild(newNavToggle, navToggle);
     
-    // Open menu
+    // Toggle menu (hamburger transforms to X)
     newNavToggle.onclick = function(e) {
         e.preventDefault();
         e.stopPropagation();
-        navMenu.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        console.log('Menu opened');
+        
+        const isOpen = navMenu.classList.contains('active');
+        
+        if (isOpen) {
+            // Close menu
+            navMenu.classList.remove('active');
+            newNavToggle.classList.remove('active');
+            document.body.style.overflow = '';
+        } else {
+            // Open menu
+            navMenu.classList.add('active');
+            newNavToggle.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
     };
 
-    // Close button
+    // Close button (backup, hidden by default now)
     if (navClose) {
-        const newNavClose = navClose.cloneNode(true);
-        navClose.parentNode.replaceChild(newNavClose, navClose);
-        
-        newNavClose.onclick = function(e) {
+        navClose.onclick = function(e) {
             e.preventDefault();
-            e.stopPropagation();
             navMenu.classList.remove('active');
+            document.getElementById('nav-toggle').classList.remove('active');
             document.body.style.overflow = '';
-            console.log('Menu closed');
         };
     }
 
@@ -56,6 +63,7 @@ function initNavigation() {
     navLinks.forEach(function(link) {
         link.addEventListener('click', function() {
             navMenu.classList.remove('active');
+            document.getElementById('nav-toggle').classList.remove('active');
             document.body.style.overflow = '';
         });
     });
@@ -66,6 +74,7 @@ function initNavigation() {
             const toggle = document.getElementById('nav-toggle');
             if (!navMenu.contains(e.target) && (!toggle || !toggle.contains(e.target))) {
                 navMenu.classList.remove('active');
+                if (toggle) toggle.classList.remove('active');
                 document.body.style.overflow = '';
             }
         }

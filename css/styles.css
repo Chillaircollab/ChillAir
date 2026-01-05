@@ -323,26 +323,38 @@ button {
     border: none;
     cursor: pointer;
     z-index: 1002;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    align-items: center;
 }
 
 .nav__toggle span {
+    display: block;
     width: 25px;
     height: 2px;
     background: var(--color-gray-700);
-    transition: var(--transition-base);
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+/* Hamburger to X animation */
+.nav__toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav__toggle.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+.nav__toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
 }
 
 .nav__close {
     display: none;
-    position: absolute;
-    top: var(--space-lg);
-    right: var(--space-lg);
-    font-size: 1.5rem;
-    color: var(--color-gray-700);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: var(--space-sm);
 }
 
 /* Mobile Navigation */

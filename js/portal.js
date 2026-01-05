@@ -1,18 +1,17 @@
-// ===== Chill Air Portal JavaScript =====
+// ===== Chill Air Portal - Professional Dark Mode =====
 
 // Demo Data
 const demoData = {
-    // Admin credentials
     admin: {
         username: 'Hicks',
         password: 'frank1e',
         name: 'Greg Hicks',
-        role: 'Administrator'
+        role: 'Administrator',
+        initials: 'GH'
     },
     
-    // Demo clients
     clients: [
-        { id: 1, name: 'John Smith', email: 'john@example.com', phone: '027 123 4567', address: '123 Bealey Ave, Christchurch Central', password: 'demo123', jobs: 5 },
+        { id: 1, name: 'John Smith', email: 'john@example.com', phone: '027 123 4567', address: '123 Bealey Ave, Christchurch', password: 'demo123', jobs: 5 },
         { id: 2, name: 'Sarah Johnson', email: 'sarah@example.com', phone: '027 234 5678', address: '45 Riccarton Rd, Riccarton', password: 'demo123', jobs: 3 },
         { id: 3, name: 'Mike Thompson', email: 'mike@example.com', phone: '027 345 6789', address: '78 Memorial Ave, Burnside', password: 'demo123', jobs: 2 },
         { id: 4, name: 'Lisa Wilson', email: 'lisa@example.com', phone: '027 456 7890', address: '22 Papanui Rd, Merivale', password: 'demo123', jobs: 4 },
@@ -22,89 +21,52 @@ const demoData = {
         { id: 8, name: 'Olivia Taylor', email: 'olivia@example.com', phone: '027 890 1234', address: '67 Tancred St, Ashburton', password: 'demo123', jobs: 1 }
     ],
     
-    // Demo jobs
     jobs: [
-        { id: 'JOB-001', clientId: 1, client: 'John Smith', service: 'Heat Pump Installation', description: 'Install new Daikin 7.1kW heat pump in living room', status: 'progress', progress: 75, date: '2026-01-02', checklist: [true, true, true, false, false] },
-        { id: 'JOB-002', clientId: 2, client: 'Sarah Johnson', service: 'Annual Service', description: 'Annual maintenance service for Mitsubishi heat pump', status: 'pending', progress: 20, date: '2026-01-05', checklist: [true, false, false, false, false] },
-        { id: 'JOB-003', clientId: 3, client: 'Mike Thompson', service: 'Repair', description: 'Heat pump not cooling properly, making unusual noise', status: 'completed', progress: 100, date: '2025-12-28', checklist: [true, true, true, true, true] },
-        { id: 'JOB-004', clientId: 4, client: 'Lisa Wilson', service: 'Ventilation System', description: 'Install ducted ventilation system for whole house', status: 'pending', progress: 10, date: '2026-01-08', checklist: [true, false, false, false, false] },
-        { id: 'JOB-005', clientId: 5, client: 'David Brown', service: 'Heat Pump Installation', description: 'New Fujitsu 5kW heat pump for bedroom', status: 'progress', progress: 50, date: '2026-01-03', checklist: [true, true, false, false, false] },
-        { id: 'JOB-006', clientId: 1, client: 'John Smith', service: 'Repair', description: 'Remote control not working, check electrical connection', status: 'completed', progress: 100, date: '2025-12-20', checklist: [true, true, true, true, true] },
-        { id: 'JOB-007', clientId: 6, client: 'Emma Davis', service: 'Heat Pump Installation', description: 'Install two split systems - bedroom and office', status: 'progress', progress: 35, date: '2026-01-04', checklist: [true, true, false, false, false] },
-        { id: 'JOB-008', clientId: 7, client: 'James Martin', service: 'Pool Heat Pump', description: 'Install pool heating system', status: 'pending', progress: 5, date: '2026-01-15', checklist: [false, false, false, false, false] },
-        { id: 'JOB-009', clientId: 2, client: 'Sarah Johnson', service: 'Hot Water Heat Pump', description: 'Replace electric hot water with heat pump system', status: 'completed', progress: 100, date: '2025-12-15', checklist: [true, true, true, true, true] },
-        { id: 'JOB-010', clientId: 8, client: 'Olivia Taylor', service: 'Maintenance', description: 'Filter clean and system check', status: 'pending', progress: 0, date: '2026-01-10', checklist: [false, false, false, false, false] }
+        { id: 'JOB-001', clientId: 1, client: 'John Smith', service: 'Heat Pump Installation', description: 'Install new Daikin 7.1kW heat pump in living room', status: 'progress', progress: 75, date: '2026-01-08', checklist: ['Site inspection', 'Equipment ordered', 'Installation started', 'Testing', 'Handover'] },
+        { id: 'JOB-002', clientId: 2, client: 'Sarah Johnson', service: 'Annual Service', description: 'Annual maintenance service for Mitsubishi heat pump', status: 'pending', progress: 20, date: '2026-01-10', checklist: ['Booking confirmed', 'Filter check', 'Gas levels', 'Electrical test', 'Report'] },
+        { id: 'JOB-003', clientId: 3, client: 'Mike Thompson', service: 'Repair', description: 'Heat pump not cooling properly, making unusual noise', status: 'completed', progress: 100, date: '2025-12-28', checklist: ['Diagnosis', 'Parts ordered', 'Repair complete', 'Testing', 'Warranty'] },
+        { id: 'JOB-004', clientId: 4, client: 'Lisa Wilson', service: 'Ventilation System', description: 'Install ducted ventilation system for whole house', status: 'pending', progress: 10, date: '2026-01-15', checklist: ['Design', 'Quote accepted', 'Installation', 'Commissioning', 'Training'] },
+        { id: 'JOB-005', clientId: 1, client: 'John Smith', service: 'Repair', description: 'Remote control not working, check electrical connection', status: 'completed', progress: 100, date: '2025-12-20', checklist: ['Call received', 'Site visit', 'Repair', 'Testing', 'Invoice'] },
+        { id: 'JOB-006', clientId: 6, client: 'Emma Davis', service: 'Heat Pump Installation', description: 'Install two split systems - bedroom and office', status: 'progress', progress: 50, date: '2026-01-09', checklist: ['Quote', 'Equipment', 'Bedroom install', 'Office install', 'Complete'] },
+        { id: 'JOB-007', clientId: 7, client: 'James Martin', service: 'Pool Heat Pump', description: 'Install pool heating system', status: 'pending', progress: 5, date: '2026-01-20', checklist: ['Site assessment', 'Quote', 'Order equipment', 'Installation', 'Commissioning'] },
+        { id: 'JOB-008', clientId: 8, client: 'Olivia Taylor', service: 'Maintenance', description: 'Filter clean and system check', status: 'pending', progress: 0, date: '2026-01-12', checklist: ['Booking', 'Service', 'Report', 'Invoice', 'Follow-up'] }
     ],
     
-    // Demo quotes
     quotes: [
-        { id: 'QTE-001', clientId: 1, client: 'John Smith', description: 'Daikin 7.1kW Heat Pump Installation - includes unit, installation, and 5-year warranty', amount: 4500, status: 'pending', expiry: '2026-01-15' },
+        { id: 'QTE-001', clientId: 1, client: 'John Smith', description: 'Daikin 7.1kW Heat Pump Installation - includes unit, installation, and 5-year warranty', amount: 4500, status: 'accepted', expiry: '2026-01-15' },
         { id: 'QTE-002', clientId: 2, client: 'Sarah Johnson', description: 'Annual Service Package - 2 services per year, priority booking', amount: 350, status: 'pending', expiry: '2026-01-20' },
-        { id: 'QTE-003', clientId: 4, client: 'Lisa Wilson', description: 'Whole house ventilation system with 4 rooms, includes HRV unit', amount: 6800, status: 'accepted', expiry: '2026-01-10' },
-        { id: 'QTE-004', clientId: 5, client: 'David Brown', description: 'Fujitsu 5kW bedroom heat pump with WiFi control', amount: 3200, status: 'accepted', expiry: '2026-01-05' },
-        { id: 'QTE-005', clientId: 7, client: 'James Martin', description: 'Pool heat pump system - 15kW capacity, includes installation', amount: 8500, status: 'pending', expiry: '2026-01-25' },
-        { id: 'QTE-006', clientId: 3, client: 'Mike Thompson', description: 'Repair diagnostic and fix - compressor issue', amount: 450, status: 'accepted', expiry: '2025-12-30' }
+        { id: 'QTE-003', clientId: 4, client: 'Lisa Wilson', description: 'Whole house ventilation system with 4 rooms, includes HRV unit', amount: 6800, status: 'pending', expiry: '2026-01-25' },
+        { id: 'QTE-004', clientId: 7, client: 'James Martin', description: 'Pool heat pump system - 15kW capacity, includes installation', amount: 8500, status: 'pending', expiry: '2026-01-30' }
     ],
     
-    // Demo invoices
     invoices: [
-        { id: 'INV-001', clientId: 3, client: 'Mike Thompson', description: 'Repair service - compressor replacement', amount: 450, status: 'paid', due: '2026-01-05' },
-        { id: 'INV-002', clientId: 2, client: 'Sarah Johnson', description: 'Hot water heat pump installation', amount: 5200, status: 'paid', due: '2025-12-30' },
-        { id: 'INV-003', clientId: 1, client: 'John Smith', description: 'Remote control repair', amount: 120, status: 'paid', due: '2025-12-25' },
-        { id: 'INV-004', clientId: 4, client: 'Lisa Wilson', description: 'Deposit - Ventilation system', amount: 2040, status: 'pending', due: '2026-01-08' },
-        { id: 'INV-005', clientId: 5, client: 'David Brown', description: 'Deposit - Fujitsu heat pump', amount: 960, status: 'pending', due: '2026-01-10' }
+        { id: 'INV-001', clientId: 1, client: 'John Smith', description: 'Heat Pump Installation - Deposit', amount: 2250, status: 'paid', due: '2026-01-05', paid: '2026-01-03' },
+        { id: 'INV-002', clientId: 3, client: 'Mike Thompson', description: 'Heat Pump Repair - Parts & Labour', amount: 450, status: 'pending', due: '2026-01-15' },
+        { id: 'INV-003', clientId: 1, client: 'John Smith', description: 'Remote Control Repair', amount: 120, status: 'paid', due: '2025-12-28', paid: '2025-12-27' },
+        { id: 'INV-004', clientId: 6, client: 'Emma Davis', description: 'Heat Pump Installation - Progress Payment', amount: 3200, status: 'pending', due: '2026-01-20' },
+        { id: 'INV-005', clientId: 2, client: 'Sarah Johnson', description: 'Annual Service', amount: 175, status: 'overdue', due: '2025-12-30' }
     ],
     
-    // Demo bookings
+    events: [
+        { id: 1, title: 'Installation - John Smith', date: '2026-01-08', time: '09:00', clientId: 1, type: 'job' },
+        { id: 2, title: 'Service - Sarah Johnson', date: '2026-01-10', time: '10:00', clientId: 2, type: 'job' },
+        { id: 3, title: 'Team Meeting', date: '2026-01-06', time: '08:00', clientId: null, type: 'meeting' },
+        { id: 4, title: 'Quote follow-up - Lisa', date: '2026-01-07', time: '14:00', clientId: 4, type: 'reminder' }
+    ],
+    
     bookings: [
-        { id: 1, clientId: 1, client: 'John Smith', date: '2026-01-06', time: '9:00 AM', service: 'Heat Pump Installation (Completion)', status: 'confirmed' },
-        { id: 2, clientId: 2, client: 'Sarah Johnson', date: '2026-01-05', time: '2:00 PM', service: 'Annual Service', status: 'confirmed' },
-        { id: 3, clientId: 6, client: 'Emma Davis', date: '2026-01-07', time: '10:00 AM', service: 'Installation - Day 2', status: 'confirmed' },
-        { id: 4, clientId: 8, client: 'Olivia Taylor', date: '2026-01-10', time: '11:00 AM', service: 'Maintenance Check', status: 'pending' },
-        { id: 5, clientId: 7, client: 'James Martin', date: '2026-01-15', time: '8:30 AM', service: 'Pool Heat Pump Install', status: 'confirmed' }
-    ],
-    
-    // Demo products
-    products: [
-        { id: 1, name: 'Daikin 6kW Split System', description: 'Efficient inverter heat pump, perfect for medium rooms', price: 3200, image: '❄️' },
-        { id: 2, name: 'Mitsubishi 7.1kW Heat Pump', description: 'High-capacity unit for large living areas', price: 3800, image: '🌡️' },
-        { id: 3, name: 'Fujitsu 5kW Compact', description: 'Compact design ideal for bedrooms', price: 2900, image: '💨' },
-        { id: 4, name: 'Panasonic 8kW Premium', description: 'Premium unit with advanced air purification', price: 4200, image: '✨' },
-        { id: 5, name: 'Hitachi 6.5kW Inverter', description: 'Quiet operation with smart WiFi control', price: 3400, image: '📱' },
-        { id: 6, name: 'Filter Replacement Kit', description: 'Genuine replacement filters for most brands', price: 45, image: '🔧' },
-        { id: 7, name: 'WiFi Controller Module', description: 'Add smart control to any compatible unit', price: 185, image: '📶' },
-        { id: 8, name: 'Remote Control', description: 'Universal replacement remote', price: 85, image: '🎮' },
-        { id: 9, name: 'Service Package - 2 Year', description: 'Bi-annual service with priority booking', price: 599, image: '📋' },
-        { id: 10, name: 'Extended Warranty - 5 Year', description: 'Additional warranty coverage', price: 350, image: '🛡️' }
-    ],
-    
-    // Calendar events
-    calendarEvents: [
-        { date: '2026-01-03', title: 'David Brown - Installation', time: '9:00 AM' },
-        { date: '2026-01-05', title: 'Sarah Johnson - Service', time: '2:00 PM' },
-        { date: '2026-01-06', title: 'John Smith - Completion', time: '9:00 AM' },
-        { date: '2026-01-07', title: 'Emma Davis - Install Day 2', time: '10:00 AM' },
-        { date: '2026-01-08', title: 'Lisa Wilson - Start', time: '8:30 AM' },
-        { date: '2026-01-10', title: 'Olivia Taylor - Maintenance', time: '11:00 AM' },
-        { date: '2026-01-15', title: 'James Martin - Pool HP', time: '8:30 AM' }
+        { id: 1, clientId: 1, service: 'Annual Service', date: '2026-02-15', time: 'Morning', status: 'confirmed' },
+        { id: 2, clientId: 2, service: 'Filter Clean', date: '2026-01-25', time: 'Afternoon', status: 'pending' }
     ]
 };
 
-// State management
+// State
 let currentUser = null;
 let isAdmin = false;
 let currentPage = 'dashboard';
-let currentCalendarDate = new Date();
-let calendarView = 'month';
-
-// Checklist items
-const checklistItems = [
-    'Quote Sent',
-    'Appointment Scheduled',
-    'Parts Ordered',
-    'Work Completed',
-    'Invoice Sent'
-];
+let currentMonth = new Date();
+let currentEditingJob = null;
+let currentEditingClient = null;
 
 // DOM Ready
 document.addEventListener('DOMContentLoaded', function() {
@@ -112,6 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initMobileMenu();
     initModals();
+    initFilters();
+    initForms();
 });
 
 // ===== Login System =====
@@ -120,35 +84,20 @@ function initLogin() {
     const loginForm = document.getElementById('login-form');
     const loginType = document.getElementById('login-type');
 
-    if (!loginTabs.length || !loginForm || !loginType) {
-        console.error('Login elements not found');
-        return;
-    }
+    if (!loginTabs.length || !loginForm || !loginType) return;
 
-    console.log('Login system initialized with ' + loginTabs.length + ' tabs');
-
-    // Tab switching - use onclick for reliability
+    // Tab switching
     loginTabs.forEach(function(tab) {
         tab.onclick = function(e) {
             e.preventDefault();
-            e.stopPropagation();
-            
-            // Update visual state
-            loginTabs.forEach(function(t) {
-                t.classList.remove('active');
-            });
+            loginTabs.forEach(function(t) { t.classList.remove('active'); });
             this.classList.add('active');
-            
-            // Update hidden form value
-            const tabType = this.getAttribute('data-tab');
-            loginType.value = tabType;
-            
-            console.log('Login tab switched to:', tabType);
+            loginType.value = this.getAttribute('data-tab');
         };
     });
 
-    // Login form submission
-    loginForm.addEventListener('submit', (e) => {
+    // Login form
+    loginForm.onsubmit = function(e) {
         e.preventDefault();
         
         const email = document.getElementById('login-email').value;
@@ -156,31 +105,23 @@ function initLogin() {
         const type = loginType.value;
 
         if (type === 'admin') {
-            // Admin login
             if (email === demoData.admin.username && password === demoData.admin.password) {
                 loginAsAdmin();
             } else {
                 showNotification('Invalid admin credentials', 'error');
             }
         } else {
-            // Client login
-            const client = demoData.clients.find(c => 
-                (c.email === email || c.name.toLowerCase() === email.toLowerCase()) && 
-                c.password === password
-            );
+            const client = demoData.clients.find(function(c) {
+                return (c.email === email || c.name.toLowerCase() === email.toLowerCase()) && c.password === password;
+            });
             
             if (client) {
                 loginAsClient(client);
             } else {
-                // Demo: allow any login for demo purposes
-                if (password === 'demo123' || password === 'demo') {
-                    loginAsClient(demoData.clients[0]);
-                } else {
-                    showNotification('Invalid credentials. Try demo123 as password.', 'error');
-                }
+                showNotification('Invalid credentials. Check demo credentials below.', 'error');
             }
         }
-    });
+    };
 }
 
 function loginAsAdmin() {
@@ -190,49 +131,40 @@ function loginAsAdmin() {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('portal').classList.add('active');
     
-    // Update UI for admin
-    document.querySelectorAll('.client-nav').forEach(el => el.classList.add('hidden'));
-    document.querySelectorAll('.admin-nav').forEach(el => el.classList.remove('hidden'));
+    document.querySelectorAll('.client-nav').forEach(function(el) { el.classList.add('hidden'); });
+    document.querySelectorAll('.admin-nav').forEach(function(el) { el.classList.remove('hidden'); });
     
     document.getElementById('user-name').textContent = currentUser.name;
     document.getElementById('user-role').textContent = currentUser.role;
-    document.getElementById('user-avatar').textContent = 'GH';
+    document.getElementById('user-avatar').textContent = currentUser.initials;
     
-    document.getElementById('new-job-btn').style.display = 'none';
-    
-    // Update mobile nav for admin
     updateMobileNavForAdmin();
-    
     navigateTo('dashboard');
     loadAdminDashboard();
     
-    showNotification(`Welcome back, ${currentUser.name}!`, 'success');
+    showNotification('Welcome back, ' + currentUser.name + '!', 'success');
 }
 
 function loginAsClient(client) {
     currentUser = client;
+    currentUser.initials = client.name.split(' ').map(function(n) { return n[0]; }).join('');
     isAdmin = false;
     
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('portal').classList.add('active');
     
-    // Update UI for client
-    document.querySelectorAll('.client-nav').forEach(el => el.classList.remove('hidden'));
-    document.querySelectorAll('.admin-nav').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.client-nav').forEach(function(el) { el.classList.remove('hidden'); });
+    document.querySelectorAll('.admin-nav').forEach(function(el) { el.classList.add('hidden'); });
     
     document.getElementById('user-name').textContent = currentUser.name;
     document.getElementById('user-role').textContent = 'Client';
-    document.getElementById('user-avatar').textContent = getInitials(currentUser.name);
+    document.getElementById('user-avatar').textContent = currentUser.initials;
     
-    document.getElementById('new-job-btn').style.display = 'inline-flex';
-    
-    // Reset mobile nav for client
     updateMobileNavForClient();
-    
     navigateTo('dashboard');
     loadClientDashboard();
     
-    showNotification(`Welcome back, ${currentUser.name}!`, 'success');
+    showNotification('Welcome back, ' + currentUser.name + '!', 'success');
 }
 
 function logout() {
@@ -241,87 +173,88 @@ function logout() {
     
     document.getElementById('portal').classList.remove('active');
     document.getElementById('login-screen').style.display = 'flex';
-    
-    // Reset form
     document.getElementById('login-form').reset();
-    document.querySelectorAll('.login-tab').forEach((t, i) => {
+    
+    // Reset to client tab
+    document.querySelectorAll('.login-tab').forEach(function(t, i) {
         t.classList.toggle('active', i === 0);
     });
     document.getElementById('login-type').value = 'client';
+    
+    showNotification('You have been signed out', 'info');
 }
 
 // ===== Navigation =====
 function initNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav__link');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+    document.querySelectorAll('.nav-link:not(.mobile-nav__logout)').forEach(function(link) {
+        link.onclick = function(e) {
             e.preventDefault();
-            const page = link.dataset.page;
-            navigateTo(page);
-            closeSidebar();
-        });
+            const page = this.getAttribute('data-page');
+            if (page) navigateTo(page);
+        };
     });
-    
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const page = link.dataset.page;
-            navigateTo(page);
-        });
-    });
-    
-    document.getElementById('logout-btn').addEventListener('click', logout);
-    document.getElementById('new-job-btn').addEventListener('click', () => openModal('new-job-modal'));
 }
 
 function navigateTo(page) {
     currentPage = page;
     
     // Update nav links
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.toggle('active', link.dataset.page === page);
-    });
-    document.querySelectorAll('.mobile-nav__link').forEach(link => {
-        link.classList.toggle('active', link.dataset.page === page);
+    document.querySelectorAll('.nav-link').forEach(function(link) {
+        link.classList.toggle('active', link.getAttribute('data-page') === page);
     });
     
-    // Update page sections
-    document.querySelectorAll('.page-section').forEach(section => {
+    document.querySelectorAll('.mobile-nav__link').forEach(function(link) {
+        link.classList.toggle('active', link.getAttribute('data-page') === page);
+    });
+    
+    // Hide all pages
+    document.querySelectorAll('.page-section').forEach(function(section) {
         section.classList.remove('active');
     });
     
-    const pageSection = document.getElementById(`page-${page}`);
-    if (pageSection) {
-        pageSection.classList.add('active');
-    }
+    // Show target page
+    const pageMap = {
+        'dashboard': isAdmin ? 'page-admin-dashboard' : 'page-dashboard',
+        'jobs': isAdmin ? 'page-admin-jobs' : 'page-jobs',
+        'quotes': isAdmin ? 'page-admin-quotes' : 'page-quotes',
+        'invoices': isAdmin ? 'page-admin-invoices' : 'page-invoices',
+        'bookings': 'page-bookings',
+        'request-quote': 'page-request-quote',
+        'book-service': 'page-book-service',
+        'admin-jobs': 'page-admin-jobs',
+        'admin-quotes': 'page-admin-quotes',
+        'admin-invoices': 'page-admin-invoices',
+        'admin-calendar': 'page-admin-calendar',
+        'admin-clients': 'page-admin-clients'
+    };
     
-    // Update header
-    updateHeader(page);
+    const targetId = pageMap[page] || 'page-dashboard';
+    const targetPage = document.getElementById(targetId);
+    if (targetPage) targetPage.classList.add('active');
+    
+    // Update header title
+    const titles = {
+        'dashboard': 'Dashboard',
+        'jobs': 'My Jobs',
+        'quotes': 'Quotes',
+        'invoices': 'Invoices',
+        'bookings': 'Bookings',
+        'request-quote': 'Request Quote',
+        'book-service': 'Book Service',
+        'admin-jobs': 'All Jobs',
+        'admin-quotes': 'Manage Quotes',
+        'admin-invoices': 'Manage Invoices',
+        'admin-calendar': 'Calendar',
+        'admin-clients': 'Clients'
+    };
+    
+    document.getElementById('page-title').textContent = titles[page] || 'Dashboard';
     
     // Load page data
     loadPageData(page);
-}
-
-function updateHeader(page) {
-    const titles = {
-        'dashboard': { title: 'Dashboard', subtitle: 'Welcome back!' },
-        'jobs': { title: 'My Jobs', subtitle: 'Track your service requests' },
-        'quotes': { title: 'Quotes', subtitle: 'Review and accept quotes' },
-        'products': { title: 'Products', subtitle: 'Browse available products' },
-        'bookings': { title: 'Bookings', subtitle: 'Your upcoming appointments' },
-        'profile': { title: 'My Profile', subtitle: 'Manage your account' },
-        'admin-jobs': { title: 'Job Requests', subtitle: 'Manage all customer jobs' },
-        'admin-quotes': { title: 'Quote Management', subtitle: 'Send and track quotes' },
-        'admin-invoices': { title: 'Invoices', subtitle: 'Manage billing' },
-        'admin-clients': { title: 'Clients', subtitle: 'Customer management' },
-        'admin-calendar': { title: 'Work Calendar', subtitle: 'View scheduled work' }
-    };
     
-    const pageInfo = titles[page] || { title: 'Dashboard', subtitle: '' };
-    document.getElementById('page-title').textContent = pageInfo.title;
-    document.getElementById('page-subtitle').textContent = pageInfo.subtitle;
+    // Close mobile sidebar
+    closeMobileSidebar();
 }
 
 function loadPageData(page) {
@@ -335,14 +268,11 @@ function loadPageData(page) {
         case 'quotes':
             loadClientQuotes();
             break;
-        case 'products':
-            loadProducts();
+        case 'invoices':
+            loadClientInvoices();
             break;
         case 'bookings':
             loadClientBookings();
-            break;
-        case 'profile':
-            loadProfile();
             break;
         case 'admin-jobs':
             loadAdminJobs();
@@ -353,656 +283,597 @@ function loadPageData(page) {
         case 'admin-invoices':
             loadAdminInvoices();
             break;
-        case 'admin-clients':
-            loadAdminClients();
-            break;
         case 'admin-calendar':
             loadCalendar();
+            break;
+        case 'admin-clients':
+            loadAdminClients();
             break;
     }
 }
 
 // ===== Mobile Menu =====
 function initMobileMenu() {
-    const menuToggle = document.getElementById('menu-toggle');
+    const menuBtn = document.getElementById('mobile-menu-btn');
     const sidebar = document.getElementById('sidebar');
     const overlay = document.getElementById('sidebar-overlay');
     
-    menuToggle.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-        overlay.classList.toggle('active');
-    });
+    if (menuBtn) {
+        menuBtn.onclick = function() {
+            sidebar.classList.add('active');
+            overlay.classList.add('active');
+        };
+    }
     
-    overlay.addEventListener('click', closeSidebar);
+    if (overlay) {
+        overlay.onclick = closeMobileSidebar;
+    }
+    
+    // Mobile nav links
+    document.querySelectorAll('.mobile-nav__link:not(.mobile-nav__logout)').forEach(function(link) {
+        link.onclick = function(e) {
+            e.preventDefault();
+            const page = this.getAttribute('data-page');
+            if (page) navigateTo(page);
+        };
+    });
 }
 
-function closeSidebar() {
+function closeMobileSidebar() {
     document.getElementById('sidebar').classList.remove('active');
     document.getElementById('sidebar-overlay').classList.remove('active');
 }
 
 function updateMobileNavForAdmin() {
-    const mobileNav = document.querySelector('.mobile-nav__list');
-    mobileNav.innerHTML = `
-        <li><a href="#" class="mobile-nav__link active" data-page="dashboard"><span class="mobile-nav__icon">🏠</span><span>Home</span></a></li>
-        <li><a href="#" class="mobile-nav__link" data-page="admin-jobs"><span class="mobile-nav__icon">📋</span><span>Jobs</span></a></li>
-        <li><a href="#" class="mobile-nav__link" data-page="admin-quotes"><span class="mobile-nav__icon">💰</span><span>Quotes</span></a></li>
-        <li><a href="#" class="mobile-nav__link" data-page="admin-calendar"><span class="mobile-nav__icon">📆</span><span>Calendar</span></a></li>
-        <li><a href="#" class="mobile-nav__link mobile-nav__logout" onclick="logout(); return false;"><span class="mobile-nav__icon">🚪</span><span>Sign Out</span></a></li>
-    `;
+    const nav = document.getElementById('mobile-nav-list');
+    nav.innerHTML = '<li><a href="#" class="mobile-nav__link active" data-page="dashboard"><span class="mobile-nav__icon">🏠</span><span>Home</span></a></li>' +
+        '<li><a href="#" class="mobile-nav__link" data-page="admin-jobs"><span class="mobile-nav__icon">📋</span><span>Jobs</span></a></li>' +
+        '<li><a href="#" class="mobile-nav__link" data-page="admin-calendar"><span class="mobile-nav__icon">📆</span><span>Calendar</span></a></li>' +
+        '<li><a href="#" class="mobile-nav__link" data-page="admin-clients"><span class="mobile-nav__icon">👥</span><span>Clients</span></a></li>' +
+        '<li><a href="#" class="mobile-nav__link mobile-nav__logout" onclick="logout(); return false;"><span class="mobile-nav__icon">🚪</span><span>Out</span></a></li>';
     
-    // Re-attach event listeners
-    document.querySelectorAll('.mobile-nav__link:not(.mobile-nav__logout)').forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            navigateTo(link.dataset.page);
-        });
-    });
+    initMobileNavLinks();
 }
 
 function updateMobileNavForClient() {
-    const mobileNav = document.querySelector('.mobile-nav__list');
-    mobileNav.innerHTML = `
-        <li><a href="#" class="mobile-nav__link active" data-page="dashboard"><span class="mobile-nav__icon">🏠</span><span>Home</span></a></li>
-        <li><a href="#" class="mobile-nav__link" data-page="jobs"><span class="mobile-nav__icon">📋</span><span>Jobs</span></a></li>
-        <li><a href="#" class="mobile-nav__link" data-page="quotes"><span class="mobile-nav__icon">📝</span><span>Quotes</span></a></li>
-        <li><a href="#" class="mobile-nav__link" data-page="bookings"><span class="mobile-nav__icon">📅</span><span>Bookings</span></a></li>
-        <li><a href="#" class="mobile-nav__link mobile-nav__logout" onclick="logout(); return false;"><span class="mobile-nav__icon">🚪</span><span>Sign Out</span></a></li>
-    `;
+    const nav = document.getElementById('mobile-nav-list');
+    nav.innerHTML = '<li><a href="#" class="mobile-nav__link active" data-page="dashboard"><span class="mobile-nav__icon">🏠</span><span>Home</span></a></li>' +
+        '<li><a href="#" class="mobile-nav__link" data-page="jobs"><span class="mobile-nav__icon">📋</span><span>Jobs</span></a></li>' +
+        '<li><a href="#" class="mobile-nav__link" data-page="quotes"><span class="mobile-nav__icon">💰</span><span>Quotes</span></a></li>' +
+        '<li><a href="#" class="mobile-nav__link" data-page="invoices"><span class="mobile-nav__icon">📄</span><span>Bills</span></a></li>' +
+        '<li><a href="#" class="mobile-nav__link mobile-nav__logout" onclick="logout(); return false;"><span class="mobile-nav__icon">🚪</span><span>Out</span></a></li>';
     
-    // Re-attach event listeners
-    document.querySelectorAll('.mobile-nav__link:not(.mobile-nav__logout)').forEach(link => {
-        link.addEventListener('click', (e) => {
+    initMobileNavLinks();
+}
+
+function initMobileNavLinks() {
+    document.querySelectorAll('.mobile-nav__link:not(.mobile-nav__logout)').forEach(function(link) {
+        link.onclick = function(e) {
             e.preventDefault();
-            navigateTo(link.dataset.page);
-        });
+            navigateTo(this.getAttribute('data-page'));
+        };
     });
 }
 
 // ===== Client Dashboard =====
 function loadClientDashboard() {
-    const clientJobs = demoData.jobs.filter(j => j.clientId === currentUser.id);
-    const clientQuotes = demoData.quotes.filter(q => q.clientId === currentUser.id);
-    const clientBookings = demoData.bookings.filter(b => b.clientId === currentUser.id);
+    const clientJobs = demoData.jobs.filter(function(j) { return j.clientId === currentUser.id; });
+    const clientQuotes = demoData.quotes.filter(function(q) { return q.clientId === currentUser.id; });
+    const clientInvoices = demoData.invoices.filter(function(i) { return i.clientId === currentUser.id; });
     
-    // Update stats
-    document.getElementById('stat-active-jobs').textContent = clientJobs.filter(j => j.status !== 'completed').length;
-    document.getElementById('stat-completed').textContent = clientJobs.filter(j => j.status === 'completed').length;
-    document.getElementById('stat-pending-quotes').textContent = clientQuotes.filter(q => q.status === 'pending').length;
-    document.getElementById('stat-upcoming').textContent = clientBookings.filter(b => b.status === 'confirmed').length;
+    const activeJobs = clientJobs.filter(function(j) { return j.status !== 'completed'; }).length;
+    const completedJobs = clientJobs.filter(function(j) { return j.status === 'completed'; }).length;
+    const pendingQuotes = clientQuotes.filter(function(q) { return q.status === 'pending'; }).length;
+    const unpaidAmount = clientInvoices.filter(function(i) { return i.status !== 'paid'; }).reduce(function(sum, i) { return sum + i.amount; }, 0);
     
-    // Load recent activity
-    const recentActivity = document.getElementById('recent-activity');
-    recentActivity.innerHTML = clientJobs.slice(0, 5).map(job => `
-        <tr>
-            <td><strong>${job.id}</strong><br><small>${job.service}</small></td>
-            <td><span class="badge badge-${job.status === 'completed' ? 'completed' : job.status === 'progress' ? 'progress' : 'pending'}">${formatStatus(job.status)}</span></td>
-            <td>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <div class="progress-bar" style="width: 100px;">
-                        <div class="progress-bar__fill" style="width: ${job.progress}%"></div>
-                    </div>
-                    <span style="font-size: 12px;">${job.progress}%</span>
-                </div>
-            </td>
-            <td>${formatDate(job.date)}</td>
-        </tr>
-    `).join('');
-}
-
-// ===== Admin Dashboard =====
-function loadAdminDashboard() {
-    // Update stats for admin (all data)
-    document.getElementById('stat-active-jobs').textContent = demoData.jobs.filter(j => j.status !== 'completed').length;
-    document.getElementById('stat-completed').textContent = demoData.jobs.filter(j => j.status === 'completed').length;
-    document.getElementById('stat-pending-quotes').textContent = demoData.quotes.filter(q => q.status === 'pending').length;
-    document.getElementById('stat-upcoming').textContent = demoData.bookings.filter(b => b.status === 'confirmed').length;
+    document.getElementById('stat-active-jobs').textContent = activeJobs;
+    document.getElementById('stat-completed').textContent = completedJobs;
+    document.getElementById('stat-pending-quotes').textContent = pendingQuotes;
+    document.getElementById('stat-unpaid').textContent = '$' + unpaidAmount.toLocaleString();
     
-    // Load recent activity (all jobs)
-    const recentActivity = document.getElementById('recent-activity');
-    recentActivity.innerHTML = demoData.jobs.slice(0, 5).map(job => `
-        <tr>
-            <td><strong>${job.id}</strong><br><small>${job.client} - ${job.service}</small></td>
-            <td><span class="badge badge-${job.status === 'completed' ? 'completed' : job.status === 'progress' ? 'progress' : 'pending'}">${formatStatus(job.status)}</span></td>
-            <td>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <div class="progress-bar" style="width: 100px;">
-                        <div class="progress-bar__fill" style="width: ${job.progress}%"></div>
-                    </div>
-                    <span style="font-size: 12px;">${job.progress}%</span>
-                </div>
-            </td>
-            <td>${formatDate(job.date)}</td>
-        </tr>
-    `).join('');
+    // Recent jobs
+    const jobsContainer = document.getElementById('dashboard-jobs');
+    const recentJobs = clientJobs.filter(function(j) { return j.status !== 'completed'; }).slice(0, 3);
+    
+    if (recentJobs.length === 0) {
+        jobsContainer.innerHTML = '<div class="empty-state" style="padding: 40px;"><p style="color: var(--color-text-muted);">No active jobs</p></div>';
+    } else {
+        jobsContainer.innerHTML = recentJobs.map(function(job) {
+            return '<div style="padding: 16px 20px; border-bottom: 1px solid var(--color-border);">' +
+                '<div style="display: flex; justify-content: space-between; margin-bottom: 8px;">' +
+                '<span style="font-weight: 600; color: var(--color-text);">' + job.service + '</span>' +
+                '<span class="badge badge--' + job.status + '">' + capitalizeFirst(job.status) + '</span>' +
+                '</div>' +
+                '<div style="margin-bottom: 8px;"><div class="progress"><div class="progress-bar" style="width: ' + job.progress + '%;"></div></div></div>' +
+                '<span style="font-size: 12px; color: var(--color-text-dim);">' + job.progress + '% complete</span>' +
+                '</div>';
+        }).join('');
+    }
+    
+    // Timeline
+    const timeline = document.getElementById('dashboard-timeline');
+    const activities = [
+        { date: 'Today', title: 'Quote received', description: 'New quote for ventilation system' },
+        { date: 'Yesterday', title: 'Job progress updated', description: 'Heat pump installation at 75%' },
+        { date: 'Jan 3', title: 'Invoice paid', description: 'Deposit payment confirmed' }
+    ];
+    
+    timeline.innerHTML = activities.map(function(a) {
+        return '<div class="timeline-item">' +
+            '<div class="timeline-item__date">' + a.date + '</div>' +
+            '<div class="timeline-item__title">' + a.title + '</div>' +
+            '<div class="timeline-item__description">' + a.description + '</div>' +
+            '</div>';
+    }).join('');
 }
 
 // ===== Client Jobs =====
-function loadClientJobs() {
-    const clientJobs = demoData.jobs.filter(j => j.clientId === currentUser.id);
-    const jobsTable = document.getElementById('jobs-table');
+function loadClientJobs(filter) {
+    filter = filter || 'all';
+    let jobs = demoData.jobs.filter(function(j) { return j.clientId === currentUser.id; });
     
-    jobsTable.innerHTML = clientJobs.map(job => `
-        <tr>
-            <td><strong>${job.id}</strong></td>
-            <td>${job.service}<br><small style="color: #64748B;">${job.description.substring(0, 50)}...</small></td>
-            <td><span class="badge badge-${job.status === 'completed' ? 'completed' : job.status === 'progress' ? 'progress' : 'pending'}">${formatStatus(job.status)}</span></td>
-            <td>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <div class="progress-bar" style="width: 80px;">
-                        <div class="progress-bar__fill" style="width: ${job.progress}%"></div>
-                    </div>
-                    <span style="font-size: 12px;">${job.progress}%</span>
-                </div>
-            </td>
-            <td><button class="btn btn-secondary btn-sm" onclick="viewJobDetails('${job.id}')">View</button></td>
-        </tr>
-    `).join('');
+    if (filter !== 'all') {
+        jobs = jobs.filter(function(j) { return j.status === filter; });
+    }
+    
+    const container = document.getElementById('jobs-list');
+    
+    if (jobs.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state__icon">📋</div><div class="empty-state__title">No jobs found</div><div class="empty-state__description">You don\'t have any jobs matching this filter.</div></div>';
+        return;
+    }
+    
+    container.innerHTML = jobs.map(function(job) {
+        return '<div class="job-card">' +
+            '<div class="job-card__header">' +
+            '<div><div class="job-card__id">' + job.id + '</div><div class="job-card__title">' + job.service + '</div></div>' +
+            '<span class="badge badge--' + job.status + '">' + capitalizeFirst(job.status) + '</span>' +
+            '</div>' +
+            '<div class="job-card__description">' + job.description + '</div>' +
+            '<div class="job-card__progress">' +
+            '<div class="job-card__progress-label"><span>Progress</span><span>' + job.progress + '%</span></div>' +
+            '<div class="progress"><div class="progress-bar" style="width: ' + job.progress + '%;"></div></div>' +
+            '</div>' +
+            '<div class="job-card__footer">' +
+            '<span class="job-card__date">📅 ' + formatDate(job.date) + '</span>' +
+            '<button class="btn btn-secondary btn-sm" onclick="viewJobDetails(\'' + job.id + '\')">View Details</button>' +
+            '</div>' +
+            '</div>';
+    }).join('');
 }
 
 // ===== Client Quotes =====
 function loadClientQuotes() {
-    const clientQuotes = demoData.quotes.filter(q => q.clientId === currentUser.id);
-    const quotesList = document.getElementById('quotes-list');
+    const quotes = demoData.quotes.filter(function(q) { return q.clientId === currentUser.id; });
+    const container = document.getElementById('quotes-list');
     
-    if (clientQuotes.length === 0) {
-        quotesList.innerHTML = '<p style="text-align: center; color: #64748B; padding: 40px;">No quotes available</p>';
+    if (quotes.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state__icon">💰</div><div class="empty-state__title">No quotes</div><div class="empty-state__description">You haven\'t received any quotes yet.</div><button class="btn btn-primary" onclick="navigateTo(\'request-quote\')">Request Quote</button></div>';
         return;
     }
     
-    quotesList.innerHTML = clientQuotes.map(quote => `
-        <div class="quote-card">
-            <div class="quote-card__header">
-                <div>
-                    <div class="quote-card__title">${quote.id}</div>
-                    <span class="badge badge-${quote.status === 'accepted' ? 'completed' : 'pending'}">${quote.status === 'accepted' ? 'Accepted' : 'Pending'}</span>
-                </div>
-                <div class="quote-card__amount">$${quote.amount.toLocaleString()}</div>
-            </div>
-            <div class="quote-card__details">
-                <p>${quote.description}</p>
-                <p style="margin-top: 8px;"><strong>Valid until:</strong> ${formatDate(quote.expiry)}</p>
-            </div>
-            ${quote.status === 'pending' ? `
-                <div class="quote-card__actions">
-                    <button class="btn btn-success btn-sm" onclick="acceptQuote('${quote.id}')">Accept Quote</button>
-                    <button class="btn btn-secondary btn-sm" onclick="declineQuote('${quote.id}')">Decline</button>
-                </div>
-            ` : ''}
-        </div>
-    `).join('');
+    container.innerHTML = quotes.map(function(quote) {
+        const actions = quote.status === 'pending' ? 
+            '<button class="btn btn-success btn-sm" onclick="acceptQuote(\'' + quote.id + '\')">Accept</button><button class="btn btn-secondary btn-sm" onclick="viewQuoteDetails(\'' + quote.id + '\')">View</button>' :
+            '<button class="btn btn-secondary btn-sm" onclick="viewQuoteDetails(\'' + quote.id + '\')">View</button>';
+        
+        return '<div class="invoice-card">' +
+            '<div class="invoice-card__info"><h4>' + quote.id + '</h4><p>' + truncate(quote.description, 60) + '</p></div>' +
+            '<div class="invoice-card__amount"><h3>$' + quote.amount.toLocaleString() + '</h3><span class="badge badge--' + quote.status + '">' + capitalizeFirst(quote.status) + '</span>' +
+            '<div class="invoice-card__actions">' + actions + '</div></div>' +
+            '</div>';
+    }).join('');
 }
 
-// ===== Products =====
-function loadProducts() {
-    const productsGrid = document.getElementById('products-grid');
+// ===== Client Invoices =====
+function loadClientInvoices() {
+    const invoices = demoData.invoices.filter(function(i) { return i.clientId === currentUser.id; });
+    const container = document.getElementById('invoices-list');
     
-    productsGrid.innerHTML = demoData.products.map(product => `
-        <div class="product-card">
-            <div class="product-image">${product.image}</div>
-            <div class="product-info">
-                <div class="product-name">${product.name}</div>
-                <div class="product-description">${product.description}</div>
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div class="product-price">$${product.price.toLocaleString()}</div>
-                    <button class="btn btn-primary btn-sm" onclick="addToEnquiry(${product.id})">Enquire</button>
-                </div>
-            </div>
-        </div>
-    `).join('');
+    if (invoices.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state__icon">📄</div><div class="empty-state__title">No invoices</div><div class="empty-state__description">You don\'t have any invoices yet.</div></div>';
+        return;
+    }
+    
+    container.innerHTML = invoices.map(function(inv) {
+        const statusClass = inv.status === 'overdue' ? 'overdue' : inv.status;
+        const actions = inv.status !== 'paid' ? 
+            '<button class="btn btn-success btn-sm" onclick="openPayModal(\'' + inv.id + '\')">Pay Now</button>' : 
+            '<span style="color: var(--color-success); font-size: 12px;">✓ Paid ' + formatDate(inv.paid) + '</span>';
+        
+        return '<div class="invoice-card">' +
+            '<div class="invoice-card__info"><h4>' + inv.id + '</h4><p>' + inv.description + '</p><p style="font-size: 12px; color: var(--color-text-dim);">Due: ' + formatDate(inv.due) + '</p></div>' +
+            '<div class="invoice-card__amount"><h3>$' + inv.amount.toLocaleString() + '</h3><span class="badge badge--' + statusClass + '">' + capitalizeFirst(inv.status) + '</span>' +
+            '<div class="invoice-card__actions">' + actions + '</div></div>' +
+            '</div>';
+    }).join('');
 }
 
 // ===== Client Bookings =====
 function loadClientBookings() {
-    const clientBookings = demoData.bookings.filter(b => b.clientId === currentUser.id);
-    const bookingsTable = document.getElementById('bookings-table');
+    const bookings = demoData.bookings.filter(function(b) { return b.clientId === currentUser.id; });
+    const container = document.getElementById('bookings-list');
     
-    if (clientBookings.length === 0) {
-        bookingsTable.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #64748B;">No upcoming bookings</td></tr>';
+    if (bookings.length === 0) {
+        container.innerHTML = '<div class="empty-state"><div class="empty-state__icon">📅</div><div class="empty-state__title">No bookings</div><div class="empty-state__description">You don\'t have any upcoming appointments.</div><button class="btn btn-primary" onclick="navigateTo(\'book-service\')">Book Service</button></div>';
         return;
     }
     
-    bookingsTable.innerHTML = clientBookings.map(booking => `
-        <tr>
-            <td>${formatDate(booking.date)}</td>
-            <td>${booking.time}</td>
-            <td>${booking.service}</td>
-            <td><span class="badge badge-${booking.status === 'confirmed' ? 'completed' : 'pending'}">${booking.status === 'confirmed' ? 'Confirmed' : 'Pending'}</span></td>
-        </tr>
-    `).join('');
+    container.innerHTML = bookings.map(function(b) {
+        return '<div class="invoice-card">' +
+            '<div class="invoice-card__info"><h4>' + b.service + '</h4><p>📅 ' + formatDate(b.date) + ' - ' + b.time + '</p></div>' +
+            '<span class="badge badge--' + (b.status === 'confirmed' ? 'completed' : 'pending') + '">' + capitalizeFirst(b.status) + '</span>' +
+            '</div>';
+    }).join('');
 }
 
-// ===== Profile =====
-function loadProfile() {
-    if (!currentUser || isAdmin) return;
+// ===== Admin Dashboard =====
+function loadAdminDashboard() {
+    const activeJobs = demoData.jobs.filter(function(j) { return j.status !== 'completed'; }).length;
+    const totalRevenue = demoData.invoices.filter(function(i) { return i.status === 'paid'; }).reduce(function(sum, i) { return sum + i.amount; }, 0);
+    const pendingQuotes = demoData.quotes.filter(function(q) { return q.status === 'pending'; }).length;
     
-    document.getElementById('profile-name').value = currentUser.name;
-    document.getElementById('profile-email').value = currentUser.email;
-    document.getElementById('profile-phone').value = currentUser.phone;
-    document.getElementById('profile-address').value = currentUser.address;
+    document.getElementById('admin-stat-jobs').textContent = activeJobs;
+    document.getElementById('admin-stat-revenue').textContent = '$' + totalRevenue.toLocaleString();
+    document.getElementById('admin-stat-clients').textContent = demoData.clients.length;
+    document.getElementById('admin-stat-pending').textContent = pendingQuotes;
     
-    // Handle form submission
-    const profileForm = document.getElementById('profile-form');
-    profileForm.onsubmit = (e) => {
-        e.preventDefault();
-        currentUser.name = document.getElementById('profile-name').value;
-        currentUser.email = document.getElementById('profile-email').value;
-        currentUser.phone = document.getElementById('profile-phone').value;
-        currentUser.address = document.getElementById('profile-address').value;
-        
-        document.getElementById('user-name').textContent = currentUser.name;
-        document.getElementById('user-avatar').textContent = getInitials(currentUser.name);
-        
-        showNotification('Profile updated successfully!', 'success');
-    };
+    // Recent jobs table
+    const recentJobs = document.getElementById('admin-recent-jobs');
+    recentJobs.innerHTML = demoData.jobs.slice(0, 5).map(function(job) {
+        return '<tr onclick="viewJobDetails(\'' + job.id + '\')" style="cursor: pointer;">' +
+            '<td><strong>' + job.id + '</strong><br><small style="color: var(--color-text-muted);">' + job.service + '</small></td>' +
+            '<td>' + job.client + '</td>' +
+            '<td><span class="badge badge--' + job.status + '">' + capitalizeFirst(job.status) + '</span></td>' +
+            '</tr>';
+    }).join('');
+    
+    // Today's schedule
+    const today = new Date().toISOString().split('T')[0];
+    const todayEvents = demoData.events.filter(function(e) { return e.date === today || e.date === '2026-01-06'; });
+    const scheduleContainer = document.getElementById('admin-today-schedule');
+    
+    if (todayEvents.length === 0) {
+        scheduleContainer.innerHTML = '<p style="color: var(--color-text-muted);">No events scheduled for today</p>';
+    } else {
+        scheduleContainer.innerHTML = todayEvents.map(function(e) {
+            return '<div style="padding: 12px; background: var(--color-bg-dark); border-radius: var(--radius-md); margin-bottom: 8px;">' +
+                '<div style="display: flex; justify-content: space-between; align-items: center;">' +
+                '<span style="font-weight: 600; color: var(--color-text);">' + e.title + '</span>' +
+                '<span style="font-size: 12px; color: var(--color-primary);">' + e.time + '</span>' +
+                '</div></div>';
+        }).join('');
+    }
+    
+    // Populate client selects
+    populateClientSelects();
 }
 
 // ===== Admin Jobs =====
-function loadAdminJobs() {
-    const adminJobsTable = document.getElementById('admin-jobs-table');
+function loadAdminJobs(filter) {
+    filter = filter || 'all';
+    let jobs = demoData.jobs;
     
-    adminJobsTable.innerHTML = demoData.jobs.map(job => `
-        <tr>
-            <td><strong>${job.id}</strong></td>
-            <td>${job.client}</td>
-            <td>${job.service}<br><small style="color: #64748B;">${job.description.substring(0, 40)}...</small></td>
-            <td>
-                <select class="form-input" style="padding: 6px; font-size: 13px;" onchange="updateJobStatus('${job.id}', this.value)">
-                    <option value="pending" ${job.status === 'pending' ? 'selected' : ''}>Pending</option>
-                    <option value="progress" ${job.status === 'progress' ? 'selected' : ''}>In Progress</option>
-                    <option value="completed" ${job.status === 'completed' ? 'selected' : ''}>Completed</option>
-                    <option value="cancelled" ${job.status === 'cancelled' ? 'selected' : ''}>Cancelled</option>
-                </select>
-            </td>
-            <td>
-                <button class="btn btn-secondary btn-sm" onclick="viewJobDetails('${job.id}')">View</button>
-            </td>
-        </tr>
-    `).join('');
+    if (filter !== 'all') {
+        jobs = jobs.filter(function(j) { return j.status === filter; });
+    }
+    
+    const tbody = document.getElementById('admin-jobs-table');
+    tbody.innerHTML = jobs.map(function(job) {
+        return '<tr>' +
+            '<td><strong>' + job.id + '</strong></td>' +
+            '<td>' + job.client + '</td>' +
+            '<td>' + job.service + '</td>' +
+            '<td><span class="badge badge--' + job.status + '">' + capitalizeFirst(job.status) + '</span></td>' +
+            '<td><div class="progress" style="width: 100px;"><div class="progress-bar" style="width: ' + job.progress + '%;"></div></div></td>' +
+            '<td>' + formatDate(job.date) + '</td>' +
+            '<td><button class="btn btn-secondary btn-sm" onclick="viewJobDetails(\'' + job.id + '\')">View</button></td>' +
+            '</tr>';
+    }).join('');
 }
 
 // ===== Admin Quotes =====
 function loadAdminQuotes() {
-    const adminQuotesTable = document.getElementById('admin-quotes-table');
-    
-    // Populate client dropdown
-    const quoteClient = document.getElementById('quote-client');
-    quoteClient.innerHTML = '<option value="">Select client</option>' + 
-        demoData.clients.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
-    
-    adminQuotesTable.innerHTML = demoData.quotes.map(quote => `
-        <tr>
-            <td><strong>${quote.id}</strong></td>
-            <td>${quote.client}</td>
-            <td>$${quote.amount.toLocaleString()}</td>
-            <td><span class="badge badge-${quote.status === 'accepted' ? 'completed' : 'pending'}">${quote.status === 'accepted' ? 'Accepted' : 'Pending'}</span></td>
-            <td>
-                <button class="btn btn-secondary btn-sm" onclick="resendQuote('${quote.id}')">Resend</button>
-            </td>
-        </tr>
-    `).join('');
+    const tbody = document.getElementById('admin-quotes-table');
+    tbody.innerHTML = demoData.quotes.map(function(q) {
+        return '<tr>' +
+            '<td><strong>' + q.id + '</strong></td>' +
+            '<td>' + q.client + '</td>' +
+            '<td>' + truncate(q.description, 40) + '</td>' +
+            '<td>$' + q.amount.toLocaleString() + '</td>' +
+            '<td><span class="badge badge--' + q.status + '">' + capitalizeFirst(q.status) + '</span></td>' +
+            '<td>' + formatDate(q.expiry) + '</td>' +
+            '<td><button class="btn btn-secondary btn-sm" onclick="viewQuoteDetails(\'' + q.id + '\')">View</button></td>' +
+            '</tr>';
+    }).join('');
 }
 
 // ===== Admin Invoices =====
 function loadAdminInvoices() {
-    const adminInvoicesTable = document.getElementById('admin-invoices-table');
-    
-    // Populate client dropdown
-    const invoiceClient = document.getElementById('invoice-client');
-    invoiceClient.innerHTML = '<option value="">Select client</option>' + 
-        demoData.clients.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
-    
-    adminInvoicesTable.innerHTML = demoData.invoices.map(invoice => `
-        <tr>
-            <td><strong>${invoice.id}</strong></td>
-            <td>${invoice.client}</td>
-            <td>$${invoice.amount.toLocaleString()}</td>
-            <td><span class="badge badge-${invoice.status === 'paid' ? 'completed' : 'pending'}">${invoice.status === 'paid' ? 'Paid' : 'Pending'}</span></td>
-            <td>
-                <button class="btn btn-secondary btn-sm" onclick="resendInvoice('${invoice.id}')">Resend</button>
-                ${invoice.status === 'pending' ? `<button class="btn btn-success btn-sm" onclick="markPaid('${invoice.id}')">Mark Paid</button>` : ''}
-            </td>
-        </tr>
-    `).join('');
+    const tbody = document.getElementById('admin-invoices-table');
+    tbody.innerHTML = demoData.invoices.map(function(inv) {
+        const statusClass = inv.status === 'overdue' ? 'overdue' : inv.status;
+        return '<tr>' +
+            '<td><strong>' + inv.id + '</strong></td>' +
+            '<td>' + inv.client + '</td>' +
+            '<td>' + truncate(inv.description, 40) + '</td>' +
+            '<td>$' + inv.amount.toLocaleString() + '</td>' +
+            '<td><span class="badge badge--' + statusClass + '">' + capitalizeFirst(inv.status) + '</span></td>' +
+            '<td>' + formatDate(inv.due) + '</td>' +
+            '<td><button class="btn btn-secondary btn-sm" onclick="viewInvoiceDetails(\'' + inv.id + '\')">View</button></td>' +
+            '</tr>';
+    }).join('');
 }
 
 // ===== Admin Clients =====
 function loadAdminClients() {
-    const adminClientsTable = document.getElementById('admin-clients-table');
-    
-    adminClientsTable.innerHTML = demoData.clients.map(client => `
-        <tr>
-            <td><strong>${client.name}</strong></td>
-            <td>${client.email}</td>
-            <td>${client.phone}</td>
-            <td>${client.jobs}</td>
-            <td>
-                <button class="btn btn-secondary btn-sm" onclick="editClient(${client.id})">Edit</button>
-                <button class="btn btn-danger btn-sm" onclick="deleteClient(${client.id})">Delete</button>
-            </td>
-        </tr>
-    `).join('');
+    const tbody = document.getElementById('admin-clients-table');
+    tbody.innerHTML = demoData.clients.map(function(c) {
+        return '<tr>' +
+            '<td><strong>' + c.name + '</strong></td>' +
+            '<td>' + c.email + '</td>' +
+            '<td>' + c.phone + '</td>' +
+            '<td>' + truncate(c.address, 30) + '</td>' +
+            '<td>' + c.jobs + '</td>' +
+            '<td><button class="btn btn-secondary btn-sm" onclick="viewClientDetails(' + c.id + ')">View</button></td>' +
+            '</tr>';
+    }).join('');
 }
 
 // ===== Calendar =====
 function loadCalendar() {
-    const calendarEl = document.getElementById('calendar');
-    renderCalendar(calendarEl);
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    document.getElementById('calendar-month').textContent = monthNames[currentMonth.getMonth()] + ' ' + currentMonth.getFullYear();
     
-    // View toggle buttons
-    document.getElementById('view-week').onclick = () => {
-        calendarView = 'week';
-        document.getElementById('view-week').classList.remove('btn-secondary');
-        document.getElementById('view-week').classList.add('btn-primary');
-        document.getElementById('view-month').classList.remove('btn-primary');
-        document.getElementById('view-month').classList.add('btn-secondary');
-        renderCalendar(calendarEl);
-    };
+    const grid = document.getElementById('calendar-grid');
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth();
     
-    document.getElementById('view-month').onclick = () => {
-        calendarView = 'month';
-        document.getElementById('view-month').classList.remove('btn-secondary');
-        document.getElementById('view-month').classList.add('btn-primary');
-        document.getElementById('view-week').classList.remove('btn-primary');
-        document.getElementById('view-week').classList.add('btn-secondary');
-        renderCalendar(calendarEl);
-    };
-}
-
-let selectedDate = null;
-
-function renderCalendar(container) {
-    const year = currentCalendarDate.getFullYear();
-    const month = currentCalendarDate.getMonth();
-    
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
-                        'July', 'August', 'September', 'October', 'November', 'December'];
-    const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    
-    let html = `
-        <div class="calendar-header">
-            <button class="calendar-nav" onclick="prevMonth()">← Prev</button>
-            <h3>${monthNames[month]} ${year}</h3>
-            <button class="calendar-nav" onclick="nextMonth()">Next →</button>
-        </div>
-        <div class="calendar-grid">
-    `;
-    
-    // Day headers
-    dayNames.forEach(day => {
-        html += `<div class="calendar-day-header">${day}</div>`;
-    });
-    
-    // Get first day of month and number of days
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
     const today = new Date();
     
-    // Empty cells for days before first of month
-    for (let i = 0; i < firstDay; i++) {
-        html += '<div class="calendar-day" style="background: #f8fafc; cursor: default;"></div>';
+    let html = '<div class="calendar-header">Sun</div><div class="calendar-header">Mon</div><div class="calendar-header">Tue</div><div class="calendar-header">Wed</div><div class="calendar-header">Thu</div><div class="calendar-header">Fri</div><div class="calendar-header">Sat</div>';
+    
+    // Previous month days
+    const prevDays = new Date(year, month, 0).getDate();
+    for (let i = firstDay - 1; i >= 0; i--) {
+        html += '<div class="calendar-day calendar-day--other"><div class="calendar-day__number">' + (prevDays - i) + '</div></div>';
     }
     
-    // Days of the month
+    // Current month days
     for (let day = 1; day <= daysInMonth; day++) {
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const isToday = today.getDate() === day && today.getMonth() === month && today.getFullYear() === year;
-        const isSelected = selectedDate === dateStr;
-        const events = demoData.calendarEvents.filter(e => e.date === dateStr);
+        const dateStr = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+        const isToday = today.getFullYear() === year && today.getMonth() === month && today.getDate() === day;
+        const dayEvents = demoData.events.filter(function(e) { return e.date === dateStr; });
         
-        let eventsHtml = '';
-        events.forEach(e => {
-            eventsHtml += `<div class="calendar-event" onclick="showEventDetails('${e.date}', '${e.title}', '${e.time}'); event.stopPropagation();">
-                <span class="calendar-event-time">${e.time}</span> ${e.title.split(' - ')[0]}
-            </div>`;
-        });
+        let dayClass = 'calendar-day';
+        if (isToday) dayClass += ' calendar-day--today';
         
-        html += `<div class="calendar-day ${isToday ? 'today' : ''} ${isSelected ? 'selected' : ''}" onclick="selectDate('${dateStr}')">
-            <div class="calendar-day__number">${day}</div>
-            ${eventsHtml}
-        </div>`;
+        let eventsHtml = dayEvents.map(function(e) {
+            return '<div class="calendar-event" onclick="viewEvent(' + e.id + ')">' + e.title + '</div>';
+        }).join('');
+        
+        html += '<div class="' + dayClass + '" onclick="selectDate(\'' + dateStr + '\')"><div class="calendar-day__number">' + day + '</div>' + eventsHtml + '</div>';
     }
     
-    html += '</div>';
-    
-    // Event details panel
-    html += '<div id="event-details-panel"></div>';
-    
-    container.innerHTML = html;
-    
-    // Show selected date events if any
-    if (selectedDate) {
-        showDateEvents(selectedDate);
+    // Next month days
+    const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+    const remainingDays = totalCells - (firstDay + daysInMonth);
+    for (let i = 1; i <= remainingDays; i++) {
+        html += '<div class="calendar-day calendar-day--other"><div class="calendar-day__number">' + i + '</div></div>';
     }
+    
+    grid.innerHTML = html;
 }
 
-function selectDate(dateStr) {
-    selectedDate = dateStr;
-    showDateEvents(dateStr);
+function changeMonth(delta) {
+    currentMonth.setMonth(currentMonth.getMonth() + delta);
+    loadCalendar();
+}
+
+function selectDate(date) {
+    document.getElementById('event-date').value = date;
+    openModal('new-event-modal');
+}
+
+function createEvent() {
+    const title = document.getElementById('event-title').value;
+    const date = document.getElementById('event-date').value;
+    const time = document.getElementById('event-time').value;
+    const clientId = document.getElementById('event-client').value;
+    const type = document.getElementById('event-type').value;
     
-    // Update selected state
-    document.querySelectorAll('.calendar-day').forEach(day => {
-        day.classList.remove('selected');
+    if (!title || !date) {
+        showNotification('Please fill in required fields', 'error');
+        return;
+    }
+    
+    demoData.events.push({
+        id: demoData.events.length + 1,
+        title: title,
+        date: date,
+        time: time,
+        clientId: clientId ? parseInt(clientId) : null,
+        type: type
     });
-    event.currentTarget.classList.add('selected');
-}
-
-function showDateEvents(dateStr) {
-    const events = demoData.calendarEvents.filter(e => e.date === dateStr);
-    const panel = document.getElementById('event-details-panel');
     
-    const dateParts = dateStr.split('-');
-    const date = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-    const formattedDate = date.toLocaleDateString('en-NZ', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    
-    if (events.length === 0) {
-        panel.innerHTML = `
-            <div class="event-details">
-                <h4>📅 ${formattedDate}</h4>
-                <p style="color: var(--color-gray-500);">No appointments scheduled for this day.</p>
-            </div>
-        `;
-    } else {
-        let eventsHtml = events.map(e => `
-            <div class="event-details-item">
-                <span>🕐</span>
-                <div>
-                    <strong>${e.time}</strong>
-                    <div style="color: var(--color-gray-600);">${e.title}</div>
-                </div>
-            </div>
-        `).join('');
-        
-        panel.innerHTML = `
-            <div class="event-details">
-                <h4>📅 ${formattedDate}</h4>
-                ${eventsHtml}
-            </div>
-        `;
-    }
+    closeModal('new-event-modal');
+    loadCalendar();
+    showNotification('Event added successfully', 'success');
+    document.getElementById('new-event-form').reset();
 }
 
-function showEventDetails(date, title, time) {
-    const panel = document.getElementById('event-details-panel');
-    
-    const dateParts = date.split('-');
-    const dateObj = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-    const formattedDate = dateObj.toLocaleDateString('en-NZ', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    
-    panel.innerHTML = `
-        <div class="event-details">
-            <h4>📋 Appointment Details</h4>
-            <div class="event-details-item">
-                <span>📅</span>
-                <div><strong>Date:</strong> ${formattedDate}</div>
-            </div>
-            <div class="event-details-item">
-                <span>🕐</span>
-                <div><strong>Time:</strong> ${time}</div>
-            </div>
-            <div class="event-details-item">
-                <span>👤</span>
-                <div><strong>Client:</strong> ${title}</div>
-            </div>
-        </div>
-    `;
-    
-    selectedDate = date;
-}
-
-function prevMonth() {
-    currentCalendarDate.setMonth(currentCalendarDate.getMonth() - 1);
-    selectedDate = null;
-    renderCalendar(document.getElementById('calendar'));
-}
-
-function nextMonth() {
-    currentCalendarDate.setMonth(currentCalendarDate.getMonth() + 1);
-    selectedDate = null;
-    renderCalendar(document.getElementById('calendar'));
-}
-
-// ===== Modals =====
-function initModals() {
-    document.querySelectorAll('.modal-overlay').forEach(overlay => {
-        overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) {
-                overlay.classList.remove('active');
-            }
-        });
-    });
-}
-
-function openModal(modalId) {
-    document.getElementById(modalId).classList.add('active');
-}
-
-function closeModal(modalId) {
-    document.getElementById(modalId).classList.remove('active');
-}
-
-// ===== Job Details =====
+// ===== View Details =====
 function viewJobDetails(jobId) {
-    const job = demoData.jobs.find(j => j.id === jobId);
+    const job = demoData.jobs.find(function(j) { return j.id === jobId; });
     if (!job) return;
     
-    const content = document.getElementById('job-details-content');
-    content.innerHTML = `
-        <div style="margin-bottom: 20px;">
-            <h4 style="color: #0F172A; margin-bottom: 8px;">${job.id} - ${job.service}</h4>
-            <p style="color: #64748B;">${job.description}</p>
-            <p style="margin-top: 8px;"><strong>Client:</strong> ${job.client}</p>
-            <p><strong>Date:</strong> ${formatDate(job.date)}</p>
-            <p><strong>Status:</strong> <span class="badge badge-${job.status === 'completed' ? 'completed' : job.status === 'progress' ? 'progress' : 'pending'}">${formatStatus(job.status)}</span></p>
-        </div>
-        
-        <div style="margin-bottom: 20px;">
-            <h4 style="color: #0F172A; margin-bottom: 12px;">Progress (${job.progress}%)</h4>
-            <div class="progress-bar" style="height: 12px; margin-bottom: 16px;">
-                <div class="progress-bar__fill" style="width: ${job.progress}%"></div>
-            </div>
-            
-            <div class="progress-checklist">
-                ${checklistItems.map((item, i) => `
-                    <div class="progress-item ${job.checklist[i] ? 'completed' : ''}">
-                        <div class="progress-checkbox ${job.checklist[i] ? 'checked' : ''}" onclick="toggleChecklist('${job.id}', ${i})"></div>
-                        <span class="progress-text">${item}</span>
-                    </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
+    currentEditingJob = job;
     
-    openModal('job-details-modal');
+    const content = document.getElementById('view-job-content');
+    const checklistHtml = job.checklist.map(function(item, i) {
+        const progress = (i / job.checklist.length) * 100;
+        const checked = job.progress >= progress;
+        return '<li><div class="checklist-check ' + (checked ? 'checked' : '') + '" onclick="toggleChecklistItem(' + i + ')">' + (checked ? '✓' : '') + '</div><span>' + item + '</span></li>';
+    }).join('');
+    
+    content.innerHTML = '<div class="detail-header"><div><div class="detail-header__id">' + job.id + '</div><div class="detail-header__title">' + job.service + '</div></div><span class="badge badge--' + job.status + '">' + capitalizeFirst(job.status) + '</span></div>' +
+        '<div class="detail-grid">' +
+        '<div class="detail-item"><div class="detail-item__label">Client</div><div class="detail-item__value">' + job.client + '</div></div>' +
+        '<div class="detail-item"><div class="detail-item__label">Date</div><div class="detail-item__value">' + formatDate(job.date) + '</div></div>' +
+        '<div class="detail-item"><div class="detail-item__label">Progress</div><div class="detail-item__value">' + job.progress + '%</div></div>' +
+        '<div class="detail-item"><div class="detail-item__label">Status</div><div class="detail-item__value">' + (isAdmin ? '<select class="form-input" id="edit-job-status" style="padding: 8px;"><option value="pending"' + (job.status === 'pending' ? ' selected' : '') + '>Pending</option><option value="progress"' + (job.status === 'progress' ? ' selected' : '') + '>In Progress</option><option value="completed"' + (job.status === 'completed' ? ' selected' : '') + '>Completed</option></select>' : capitalizeFirst(job.status)) + '</div></div>' +
+        '</div>' +
+        '<div style="margin-top: 24px;"><h4 style="margin-bottom: 16px; color: var(--color-text);">Description</h4><p style="color: var(--color-text-muted);">' + job.description + '</p></div>' +
+        '<div style="margin-top: 24px;"><h4 style="margin-bottom: 16px; color: var(--color-text);">Checklist</h4><ul class="checklist">' + checklistHtml + '</ul></div>';
+    
+    document.getElementById('save-job-btn').style.display = isAdmin ? 'block' : 'none';
+    openModal('view-job-modal');
 }
 
-function toggleChecklist(jobId, index) {
-    const job = demoData.jobs.find(j => j.id === jobId);
-    if (!job || !isAdmin) return;
+function toggleChecklistItem(index) {
+    if (!isAdmin || !currentEditingJob) return;
+    // Toggle logic here - for demo, just show notification
+    showNotification('Checklist item toggled', 'info');
+}
+
+function saveJobChanges() {
+    if (!currentEditingJob) return;
     
-    job.checklist[index] = !job.checklist[index];
+    const newStatus = document.getElementById('edit-job-status').value;
+    currentEditingJob.status = newStatus;
     
-    // Recalculate progress
-    const completedSteps = job.checklist.filter(Boolean).length;
-    job.progress = Math.round((completedSteps / checklistItems.length) * 100);
+    if (newStatus === 'completed') currentEditingJob.progress = 100;
+    else if (newStatus === 'pending') currentEditingJob.progress = Math.min(currentEditingJob.progress, 20);
     
-    // Update status based on progress
-    if (job.progress === 100) {
-        job.status = 'completed';
-    } else if (job.progress > 0) {
-        job.status = 'progress';
+    closeModal('view-job-modal');
+    loadPageData(currentPage);
+    showNotification('Job updated successfully', 'success');
+}
+
+function viewQuoteDetails(quoteId) {
+    const quote = demoData.quotes.find(function(q) { return q.id === quoteId; });
+    if (!quote) return;
+    
+    const content = document.getElementById('view-quote-content');
+    content.innerHTML = '<div class="detail-header"><div><div class="detail-header__id">' + quote.id + '</div><div class="detail-header__title">Quote Details</div></div><span class="badge badge--' + quote.status + '">' + capitalizeFirst(quote.status) + '</span></div>' +
+        '<div class="detail-grid">' +
+        '<div class="detail-item"><div class="detail-item__label">Client</div><div class="detail-item__value">' + quote.client + '</div></div>' +
+        '<div class="detail-item"><div class="detail-item__label">Amount</div><div class="detail-item__value" style="font-size: 1.25rem; color: var(--color-primary);">$' + quote.amount.toLocaleString() + '</div></div>' +
+        '<div class="detail-item" style="grid-column: span 2;"><div class="detail-item__label">Valid Until</div><div class="detail-item__value">' + formatDate(quote.expiry) + '</div></div>' +
+        '</div>' +
+        '<div style="margin-top: 24px;"><h4 style="margin-bottom: 16px; color: var(--color-text);">Description</h4><p style="color: var(--color-text-muted);">' + quote.description + '</p></div>';
+    
+    const footer = document.getElementById('view-quote-footer');
+    if (!isAdmin && quote.status === 'pending') {
+        footer.innerHTML = '<button class="btn btn-secondary" onclick="closeModal(\'view-quote-modal\')">Close</button><button class="btn btn-success" onclick="acceptQuote(\'' + quote.id + '\')">Accept Quote</button>';
+    } else {
+        footer.innerHTML = '<button class="btn btn-secondary" onclick="closeModal(\'view-quote-modal\')">Close</button>';
     }
     
-    viewJobDetails(jobId);
+    openModal('view-quote-modal');
 }
 
-// ===== Actions =====
-function submitNewJob() {
+function acceptQuote(quoteId) {
+    const quote = demoData.quotes.find(function(q) { return q.id === quoteId; });
+    if (quote) {
+        quote.status = 'accepted';
+        closeModal('view-quote-modal');
+        loadPageData(currentPage);
+        showNotification('Quote accepted! We\'ll be in touch soon.', 'success');
+    }
+}
+
+function viewClientDetails(clientId) {
+    const client = demoData.clients.find(function(c) { return c.id === clientId; });
+    if (!client) return;
+    
+    currentEditingClient = client;
+    
+    const content = document.getElementById('view-client-content');
+    content.innerHTML = '<div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" id="edit-client-name" value="' + client.name + '"></div>' +
+        '<div class="form-row"><div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" id="edit-client-email" value="' + client.email + '"></div>' +
+        '<div class="form-group"><label class="form-label">Phone</label><input type="tel" class="form-input" id="edit-client-phone" value="' + client.phone + '"></div></div>' +
+        '<div class="form-group"><label class="form-label">Address</label><input type="text" class="form-input" id="edit-client-address" value="' + client.address + '"></div>' +
+        '<div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--color-border);"><p style="color: var(--color-text-muted);">Total Jobs: ' + client.jobs + '</p></div>';
+    
+    openModal('view-client-modal');
+}
+
+function saveClientChanges() {
+    if (!currentEditingClient) return;
+    
+    currentEditingClient.name = document.getElementById('edit-client-name').value;
+    currentEditingClient.email = document.getElementById('edit-client-email').value;
+    currentEditingClient.phone = document.getElementById('edit-client-phone').value;
+    currentEditingClient.address = document.getElementById('edit-client-address').value;
+    
+    closeModal('view-client-modal');
+    loadAdminClients();
+    showNotification('Client updated successfully', 'success');
+}
+
+function openPayModal(invoiceId) {
+    const invoice = demoData.invoices.find(function(i) { return i.id === invoiceId; });
+    if (!invoice) return;
+    
+    const content = document.getElementById('pay-invoice-content');
+    content.innerHTML = '<div style="text-align: center; padding: 20px 0;">' +
+        '<h3 style="color: var(--color-text); margin-bottom: 8px;">' + invoice.id + '</h3>' +
+        '<p style="color: var(--color-text-muted); margin-bottom: 24px;">' + invoice.description + '</p>' +
+        '<div style="font-size: 2.5rem; font-weight: 700; color: var(--color-primary); margin-bottom: 24px;">$' + invoice.amount.toLocaleString() + '</div>' +
+        '<p style="font-size: 12px; color: var(--color-text-dim);">Demo mode - click Pay Now to simulate payment</p>' +
+        '</div>';
+    
+    content.dataset.invoiceId = invoiceId;
+    openModal('pay-invoice-modal');
+}
+
+function processPayment() {
+    const invoiceId = document.getElementById('pay-invoice-content').dataset.invoiceId;
+    const invoice = demoData.invoices.find(function(i) { return i.id === invoiceId; });
+    
+    if (invoice) {
+        invoice.status = 'paid';
+        invoice.paid = new Date().toISOString().split('T')[0];
+        closeModal('pay-invoice-modal');
+        loadClientInvoices();
+        loadClientDashboard();
+        showNotification('Payment successful! Thank you.', 'success');
+    }
+}
+
+// ===== Create Actions =====
+function createJob() {
+    const clientId = document.getElementById('job-client').value;
     const service = document.getElementById('job-service').value;
     const description = document.getElementById('job-description').value;
     const date = document.getElementById('job-date').value;
     
-    if (!service || !description) {
-        showNotification('Please fill in all required fields', 'error');
+    if (!clientId || !service || !description || !date) {
+        showNotification('Please fill all fields', 'error');
         return;
     }
     
+    const client = demoData.clients.find(function(c) { return c.id === parseInt(clientId); });
     const newJob = {
-        id: `JOB-${String(demoData.jobs.length + 1).padStart(3, '0')}`,
-        clientId: currentUser.id,
-        client: currentUser.name,
-        service: document.getElementById('job-service').options[document.getElementById('job-service').selectedIndex].text,
+        id: 'JOB-' + String(demoData.jobs.length + 1).padStart(3, '0'),
+        clientId: parseInt(clientId),
+        client: client.name,
+        service: service,
         description: description,
         status: 'pending',
         progress: 0,
-        date: date || new Date().toISOString().split('T')[0],
-        checklist: [false, false, false, false, false]
+        date: date,
+        checklist: ['Initial contact', 'Site assessment', 'Work in progress', 'Testing', 'Handover']
     };
     
-    demoData.jobs.unshift(newJob);
-    
+    demoData.jobs.push(newJob);
     closeModal('new-job-modal');
+    loadAdminJobs();
+    showNotification('Job created successfully', 'success');
     document.getElementById('new-job-form').reset();
-    
-    showNotification('Job request submitted successfully!', 'success');
-    loadClientJobs();
-}
-
-function acceptQuote(quoteId) {
-    const quote = demoData.quotes.find(q => q.id === quoteId);
-    if (quote) {
-        quote.status = 'accepted';
-        showNotification('Quote accepted! We will be in touch shortly.', 'success');
-        loadClientQuotes();
-    }
-}
-
-function declineQuote(quoteId) {
-    const quote = demoData.quotes.find(q => q.id === quoteId);
-    if (quote) {
-        quote.status = 'declined';
-        showNotification('Quote declined.', 'success');
-        loadClientQuotes();
-    }
-}
-
-function addToEnquiry(productId) {
-    const product = demoData.products.find(p => p.id === productId);
-    if (product) {
-        showNotification(`Enquiry for ${product.name} submitted! We'll contact you soon.`, 'success');
-    }
-}
-
-function updateJobStatus(jobId, status) {
-    const job = demoData.jobs.find(j => j.id === jobId);
-    if (job) {
-        job.status = status;
-        if (status === 'completed') {
-            job.progress = 100;
-            job.checklist = [true, true, true, true, true];
-        }
-        showNotification(`Job ${jobId} updated to ${formatStatus(status)}`, 'success');
-    }
 }
 
 function sendQuote() {
@@ -1012,29 +883,25 @@ function sendQuote() {
     const expiry = document.getElementById('quote-expiry').value;
     
     if (!clientId || !description || !amount || !expiry) {
-        showNotification('Please fill in all fields', 'error');
+        showNotification('Please fill all fields', 'error');
         return;
     }
     
-    const client = demoData.clients.find(c => c.id == clientId);
-    
-    const newQuote = {
-        id: `QTE-${String(demoData.quotes.length + 1).padStart(3, '0')}`,
+    const client = demoData.clients.find(function(c) { return c.id === parseInt(clientId); });
+    demoData.quotes.push({
+        id: 'QTE-' + String(demoData.quotes.length + 1).padStart(3, '0'),
         clientId: parseInt(clientId),
         client: client.name,
         description: description,
         amount: parseFloat(amount),
         status: 'pending',
         expiry: expiry
-    };
-    
-    demoData.quotes.unshift(newQuote);
+    });
     
     closeModal('send-quote-modal');
-    document.getElementById('send-quote-form').reset();
-    
-    showNotification(`Quote sent to ${client.name}!`, 'success');
     loadAdminQuotes();
+    showNotification('Quote sent successfully', 'success');
+    document.getElementById('send-quote-form').reset();
 }
 
 function sendInvoice() {
@@ -1044,46 +911,25 @@ function sendInvoice() {
     const due = document.getElementById('invoice-due').value;
     
     if (!clientId || !description || !amount || !due) {
-        showNotification('Please fill in all fields', 'error');
+        showNotification('Please fill all fields', 'error');
         return;
     }
     
-    const client = demoData.clients.find(c => c.id == clientId);
-    
-    const newInvoice = {
-        id: `INV-${String(demoData.invoices.length + 1).padStart(3, '0')}`,
+    const client = demoData.clients.find(function(c) { return c.id === parseInt(clientId); });
+    demoData.invoices.push({
+        id: 'INV-' + String(demoData.invoices.length + 1).padStart(3, '0'),
         clientId: parseInt(clientId),
         client: client.name,
         description: description,
         amount: parseFloat(amount),
         status: 'pending',
         due: due
-    };
-    
-    demoData.invoices.unshift(newInvoice);
+    });
     
     closeModal('send-invoice-modal');
-    document.getElementById('send-invoice-form').reset();
-    
-    showNotification(`Invoice sent to ${client.name}!`, 'success');
     loadAdminInvoices();
-}
-
-function markPaid(invoiceId) {
-    const invoice = demoData.invoices.find(i => i.id === invoiceId);
-    if (invoice) {
-        invoice.status = 'paid';
-        showNotification(`Invoice ${invoiceId} marked as paid`, 'success');
-        loadAdminInvoices();
-    }
-}
-
-function resendQuote(quoteId) {
-    showNotification(`Quote ${quoteId} resent!`, 'success');
-}
-
-function resendInvoice(invoiceId) {
-    showNotification(`Invoice ${invoiceId} resent!`, 'success');
+    showNotification('Invoice sent successfully', 'success');
+    document.getElementById('send-invoice-form').reset();
 }
 
 function addClient() {
@@ -1094,135 +940,129 @@ function addClient() {
     const password = document.getElementById('client-password').value;
     
     if (!name || !email || !phone || !password) {
-        showNotification('Please fill in all required fields', 'error');
+        showNotification('Please fill required fields', 'error');
         return;
     }
     
-    const newClient = {
+    demoData.clients.push({
         id: demoData.clients.length + 1,
         name: name,
         email: email,
         phone: phone,
-        address: address || '',
+        address: address,
         password: password,
         jobs: 0
-    };
-    
-    demoData.clients.push(newClient);
+    });
     
     closeModal('add-client-modal');
-    document.getElementById('add-client-form').reset();
-    
-    showNotification(`Client ${name} added successfully!`, 'success');
     loadAdminClients();
+    populateClientSelects();
+    showNotification('Client added successfully', 'success');
+    document.getElementById('add-client-form').reset();
 }
 
-function editClient(clientId) {
-    const client = demoData.clients.find(c => c.id === clientId);
-    if (!client) return;
-    
-    // For demo, just show notification
-    showNotification(`Edit functionality for ${client.name} - would open edit modal`, 'success');
+// ===== Modals =====
+function initModals() {
+    document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+        overlay.onclick = function(e) {
+            if (e.target === this) {
+                this.classList.remove('active');
+            }
+        };
+    });
 }
 
-function deleteClient(clientId) {
-    const client = demoData.clients.find(c => c.id === clientId);
-    if (!client) return;
-    
-    if (confirm(`Are you sure you want to delete ${client.name}?`)) {
-        const index = demoData.clients.findIndex(c => c.id === clientId);
-        demoData.clients.splice(index, 1);
-        showNotification(`Client ${client.name} deleted`, 'success');
-        loadAdminClients();
+function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    if (id.includes('quote') || id.includes('invoice') || id.includes('job') || id.includes('event')) {
+        populateClientSelects();
     }
 }
 
-// ===== Utility Functions =====
-function formatStatus(status) {
-    const statuses = {
-        'pending': 'Pending',
-        'progress': 'In Progress',
-        'completed': 'Completed',
-        'cancelled': 'Cancelled'
-    };
-    return statuses[status] || status;
+function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+}
+
+function populateClientSelects() {
+    const selects = ['job-client', 'quote-client', 'invoice-client', 'event-client'];
+    selects.forEach(function(selectId) {
+        const select = document.getElementById(selectId);
+        if (select) {
+            const currentValue = select.value;
+            select.innerHTML = '<option value="">Select client</option>' + 
+                demoData.clients.map(function(c) {
+                    return '<option value="' + c.id + '">' + c.name + '</option>';
+                }).join('');
+            if (currentValue) select.value = currentValue;
+        }
+    });
+}
+
+// ===== Filters =====
+function initFilters() {
+    document.querySelectorAll('.filter-btn').forEach(function(btn) {
+        btn.onclick = function() {
+            const container = this.closest('.page-section');
+            container.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+            this.classList.add('active');
+            
+            const filter = this.getAttribute('data-filter');
+            if (currentPage === 'jobs' || currentPage === 'admin-jobs') {
+                isAdmin ? loadAdminJobs(filter) : loadClientJobs(filter);
+            }
+        };
+    });
+}
+
+// ===== Forms =====
+function initForms() {
+    const quoteForm = document.getElementById('quote-request-form');
+    if (quoteForm) {
+        quoteForm.onsubmit = function(e) {
+            e.preventDefault();
+            showNotification('Quote request submitted! We\'ll contact you soon.', 'success');
+            this.reset();
+            navigateTo('dashboard');
+        };
+    }
+    
+    const bookingForm = document.getElementById('booking-form');
+    if (bookingForm) {
+        bookingForm.onsubmit = function(e) {
+            e.preventDefault();
+            showNotification('Booking request submitted! We\'ll confirm shortly.', 'success');
+            this.reset();
+            navigateTo('bookings');
+        };
+    }
+}
+
+// ===== Helpers =====
+function showNotification(message, type) {
+    const existing = document.querySelector('.notification');
+    if (existing) existing.remove();
+    
+    const notification = document.createElement('div');
+    notification.className = 'notification notification--' + type;
+    notification.innerHTML = '<span>' + message + '</span><button onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--color-text-muted);font-size:18px;cursor:pointer;margin-left:12px;">×</button>';
+    document.body.appendChild(notification);
+    
+    setTimeout(function() {
+        if (notification.parentElement) notification.remove();
+    }, 4000);
 }
 
 function formatDate(dateStr) {
+    if (!dateStr) return '-';
     const date = new Date(dateStr);
     return date.toLocaleDateString('en-NZ', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
-function getInitials(name) {
-    return name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+function capitalizeFirst(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function showNotification(message, type = 'success') {
-    const existing = document.querySelector('.notification');
-    if (existing) existing.remove();
-
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.innerHTML = `
-        <span>${message}</span>
-        <button onclick="this.parentElement.remove()" style="background:none;border:none;color:white;font-size:18px;cursor:pointer;padding:0;margin-left:12px;">×</button>
-    `;
-    
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 16px 20px;
-        background: ${type === 'success' ? '#10B981' : '#EF4444'};
-        color: white;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        display: flex;
-        align-items: center;
-        z-index: 10000;
-        animation: slideIn 0.3s ease;
-        max-width: 400px;
-    `;
-
-    if (!document.querySelector('#notification-styles')) {
-        const style = document.createElement('style');
-        style.id = 'notification-styles';
-        style.textContent = `
-            @keyframes slideIn {
-                from { transform: translateX(100%); opacity: 0; }
-                to { transform: translateX(0); opacity: 1; }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-        if (notification.parentElement) {
-            notification.style.animation = 'slideIn 0.3s ease reverse';
-            setTimeout(() => notification.remove(), 300);
-        }
-    }, 4000);
+function truncate(str, length) {
+    if (str.length <= length) return str;
+    return str.substring(0, length) + '...';
 }
-
-// Make functions globally available
-window.openModal = openModal;
-window.closeModal = closeModal;
-window.viewJobDetails = viewJobDetails;
-window.toggleChecklist = toggleChecklist;
-window.submitNewJob = submitNewJob;
-window.acceptQuote = acceptQuote;
-window.declineQuote = declineQuote;
-window.addToEnquiry = addToEnquiry;
-window.updateJobStatus = updateJobStatus;
-window.sendQuote = sendQuote;
-window.sendInvoice = sendInvoice;
-window.markPaid = markPaid;
-window.resendQuote = resendQuote;
-window.resendInvoice = resendInvoice;
-window.addClient = addClient;
-window.editClient = editClient;
-window.deleteClient = deleteClient;
-window.prevMonth = prevMonth;
-window.nextMonth = nextMonth;
