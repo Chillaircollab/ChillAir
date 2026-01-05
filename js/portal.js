@@ -80,24 +80,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ===== Login System =====
 function initLogin() {
-    const loginTabs = document.querySelectorAll('.login-tab');
+    const tabClient = document.getElementById('tab-client');
+    const tabAdmin = document.getElementById('tab-admin');
     const loginForm = document.getElementById('login-form');
     const loginType = document.getElementById('login-type');
 
-    if (!loginTabs.length || !loginForm || !loginType) return;
+    if (!tabClient || !tabAdmin || !loginForm || !loginType) return;
 
-    // Tab switching
-    loginTabs.forEach(function(tab) {
-        tab.onclick = function(e) {
-            e.preventDefault();
-            loginTabs.forEach(function(t) { t.classList.remove('active'); });
-            this.classList.add('active');
-            loginType.value = this.getAttribute('data-tab');
-        };
+    // Tab switching with addEventListener
+    tabClient.addEventListener('click', function(e) {
+        e.preventDefault();
+        tabClient.classList.add('active');
+        tabAdmin.classList.remove('active');
+        loginType.value = 'client';
+    });
+    
+    tabAdmin.addEventListener('click', function(e) {
+        e.preventDefault();
+        tabAdmin.classList.remove('active');
+        tabClient.classList.remove('active');
+        tabAdmin.classList.add('active');
+        loginType.value = 'admin';
     });
 
     // Login form
-    loginForm.onsubmit = function(e) {
+    loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
         const email = document.getElementById('login-email').value;
@@ -121,7 +128,21 @@ function initLogin() {
                 showNotification('Invalid credentials. Check demo credentials below.', 'error');
             }
         }
-    };
+    });
+    
+    // Handle logo image errors
+    document.querySelectorAll('.logo-img').forEach(function(img) {
+        img.addEventListener('error', function() {
+            this.style.display = 'none';
+        });
+    });
+    
+    var loginLogoImg = document.getElementById('login-logo-img');
+    if (loginLogoImg) {
+        loginLogoImg.addEventListener('error', function() {
+            this.style.display = 'none';
+        });
+    }
 }
 
 function loginAsAdmin() {
