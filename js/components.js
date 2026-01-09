@@ -93,7 +93,6 @@ function getFooter(isSubpage = false) {
                 <div class="footer__contact">
                     <h4>Contact</h4>
                     <p>📞 <a href="tel:+64272065345">027 206 5345</a></p>
-                    <p>✉️ <a href="mailto:greg@chillair.co.nz">greg@chillair.co.nz</a></p>
                     <p>📍 Christchurch, Canterbury NZ</p>
                     <p>🕐 Mon-Fri: 8am - 5pm</p>
                 </div>
