@@ -99,9 +99,9 @@ function getFooter(isSubpage = false) {
             </div>
             
             <div class="footer__bottom">
-                <p>&copy; 2024 Chill Air Limited. All rights reserved. <span class="footer__credit">Site crafted by <a href="https://tempero.nz" target="_blank" rel="noopener">Tempero Creative</a></span></p>
+                <p>&copy; 2024 Chill Air Limited. All rights reserved. Site crafted by <a href="https://tempero.nz" target="_blank" rel="noopener">Sidequest Digital</a></p>
                 <div class="footer__legal">
-                    <a href="${prefix}terms.html">Terms & Conditions</a>
+                    <a href="${prefix}terms.html">Terms &amp; Conditions</a>
                     <a href="${prefix}privacy.html">Privacy Policy</a>
                 </div>
             </div>

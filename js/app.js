@@ -149,7 +149,7 @@ function initReviewsSlider() {
         const cardEl = cards[0];
         const cardStyle = window.getComputedStyle(cardEl);
         const cardWidth = cardEl.offsetWidth;
-        const gap = 24;
+        const gap = 32; // Matches CSS --space-xl (2rem)
         
         const offset = currentIndex * cardsPerView * (cardWidth + gap);
         track.style.transform = 'translateX(-' + offset + 'px)';
