@@ -31,9 +31,9 @@ function getHeader(isSubpage = false) {
             </div>
             
             <div class="nav__actions">
-                <a href="tel:+64272065345" class="nav__phone">
-                    <span class="nav__phone-icon">📞</span>
-                    <span class="nav__phone-text">027 206 5345</span>
+                <a href="${contactLink}" class="nav__phone">
+                    <span class="nav__phone-icon">✉️</span>
+                    <span class="nav__phone-text">Contact</span>
                 </a>
                 <button type="button" class="nav__toggle" id="nav-toggle" aria-label="Open menu">
                     <span></span><span></span><span></span>
