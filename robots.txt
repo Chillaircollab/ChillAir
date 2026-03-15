@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /portal.html
+
+Sitemap: https://chillair.co.nz/sitemap.xml

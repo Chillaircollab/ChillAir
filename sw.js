@@ -1,5 +1,5 @@
 // Chill Air Service Worker
-const CACHE_NAME = 'chillair-v1';
+const CACHE_NAME = 'chillair-v2';
 const OFFLINE_URL = '/index.html';
 
 // Files to cache
@@ -10,7 +10,13 @@ const urlsToCache = [
     '/css/styles.css',
     '/js/app.js',
     '/js/portal.js',
-    '/manifest.json'
+    '/manifest.json',
+    '/services/heat-pump-installation.html',
+    '/services/air-conditioning.html',
+    '/services/maintenance-repairs.html',
+    '/services/ventilation.html',
+    '/services/hot-water-heat-pumps.html',
+    '/services/pool-heat-pumps.html'
 ];
 
 // Install event - cache files

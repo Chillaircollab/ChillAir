@@ -28,13 +28,18 @@
     <meta property="og:description" content="Expert heat pump installation, maintenance & repairs across Canterbury. 10+ years experience. Free quotes available.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://chillair.co.nz">
-    <meta property="og:image" content="images/hero-banner.jpg">
+    <meta property="og:image" content="https://chillair.co.nz/images/hero-banner.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Chill Air - Professional Heat Pump Services Canterbury">
+    <meta property="og:site_name" content="Chill Air">
     <meta property="og:locale" content="en_NZ">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Chill Air | Heat Pump Experts Canterbury">
     <meta name="twitter:description" content="Canterbury's trusted heat pump specialists. Expert installation & service.">
+    <meta name="twitter:image" content="https://chillair.co.nz/images/hero-banner.jpg">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://chillair.co.nz">
@@ -49,6 +54,10 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❄️</text></svg>">
     
+    <!-- Resource Hints -->
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,13 +70,19 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
+        "@type": "HVACBusiness",
         "name": "Chill Air",
+        "legalName": "Chill Air Limited",
+        "description": "Canterbury's trusted heat pump specialists providing expert installation, maintenance and repairs of heat pumps, air conditioning and ventilation systems across Christchurch and greater Canterbury.",
         "image": "https://chillair.co.nz/images/logo.png",
+        "logo": "https://chillair.co.nz/images/logo.png",
         "@id": "https://chillair.co.nz",
         "url": "https://chillair.co.nz",
         "telephone": "+64272065345",
         "priceRange": "$$",
+        "currenciesAccepted": "NZD",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "knowsAbout": ["Heat Pumps", "Air Conditioning", "HVAC", "Ventilation Systems", "Hot Water Heat Pumps", "Pool Heat Pumps", "Heat Pump Installation", "Heat Pump Maintenance", "Heat Pump Repairs"],
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Christchurch",
@@ -94,14 +109,23 @@
             },
             "geoRadius": "100000"
         },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+64272065345",
+            "contactType": "customer service",
+            "areaServed": "NZ",
+            "availableLanguage": "English"
+        },
         "hasOfferCatalog": {
             "@type": "OfferCatalog",
             "name": "Heat Pump Services",
             "itemListElement": [
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Heat Pump Installation"}},
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Heat Pump Maintenance"}},
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Air Conditioning Service"}},
-                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ventilation Systems"}}
+                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Heat Pump Installation", "url": "https://chillair.co.nz/services/heat-pump-installation.html"}},
+                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Air Conditioning", "url": "https://chillair.co.nz/services/air-conditioning.html"}},
+                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Heat Pump Maintenance & Repairs", "url": "https://chillair.co.nz/services/maintenance-repairs.html"}},
+                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ventilation Systems", "url": "https://chillair.co.nz/services/ventilation.html"}},
+                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Hot Water Heat Pumps", "url": "https://chillair.co.nz/services/hot-water-heat-pumps.html"}},
+                {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Pool Heat Pumps", "url": "https://chillair.co.nz/services/pool-heat-pumps.html"}}
             ]
         },
         "aggregateRating": {
@@ -144,8 +168,25 @@
         ]
     }
     </script>
+
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://chillair.co.nz"
+            }
+        ]
+    }
+    </script>
 </head>
 <body>
+    <a href="#main-content" class="skip-to-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;padding:1rem;background:#0B4D6E;color:#fff;text-decoration:none;font-weight:600;">Skip to main content</a>
     <!-- Navigation -->
     <header class="header" id="header">
         <nav class="nav container">
@@ -178,7 +219,7 @@
         </nav>
     </header>
 
-    <main>
+    <main id="main-content">
         <!-- Hero Section -->
         <section class="hero hero--gradient" id="home">
             <div class="hero__content container">
@@ -797,9 +838,11 @@
                 
                 <div class="footer__contact">
                     <h4>Contact</h4>
-                    <p>📞 <a href="tel:+64272065345">027 206 5345</a></p>
-                    <p>📍 Christchurch, Canterbury NZ</p>
-                    <p>🕐 Mon-Fri: 8am - 5pm</p>
+                    <address style="font-style:normal;">
+                        <p>📞 <a href="tel:+64272065345">027 206 5345</a></p>
+                        <p>📍 Christchurch, Canterbury NZ</p>
+                        <p>🕐 Mon-Fri: 8am - 5pm</p>
+                    </address>
                 </div>
             </div>
             
