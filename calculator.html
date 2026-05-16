@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B4D6E">
+    <title>Heat Pump Size Calculator | Chill Air Christchurch</title>
+    <meta name="description" content="Find the right heat pump size for your Christchurch home. Free sizing calculator from Chill Air — Canterbury's trusted heat pump specialists.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❄️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --color-primary: #0B4D6E;
+            --color-primary-light: #1A6B8F;
+            --color-primary-dark: #063A54;
+            --color-secondary: #00B4D8;
+            --color-accent: #48CAE4;
+            --color-gold: #D4A853;
+            --color-success: #10B981;
+            --color-white: #FFFFFF;
+            --color-gray-50: #F8FAFC;
+            --color-gray-100: #F1F5F9;
+            --color-gray-200: #E2E8F0;
+            --color-gray-300: #CBD5E1;
+            --color-gray-400: #94A3B8;
+            --color-gray-500: #64748B;
+            --color-gray-600: #475569;
+            --color-gray-700: #334155;
+            --color-gray-800: #1E293B;
+            --color-gray-900: #0F172A;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Outfit', sans-serif;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, #E0F7FA 0%, #B2EBF2 50%, #E0F7FA 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            color: var(--color-gray-800);
+            line-height: 1.6;
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .brand-name {
+            font-family: var(--font-display);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            letter-spacing: 0.02em;
+        }
+        .brand-tagline {
+            font-size: 0.875rem;
+            color: var(--color-gray-500);
+            margin-top: 0.25rem;
+        }
+
+        .card {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            width: 100%;
+            max-width: 520px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+        .card-header h1 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+        .card-header p {
+            color: var(--color-accent);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .card-body { padding: 2rem; }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--color-gray-200);
+            transition: background 0.3s, transform 0.3s;
+        }
+        .step-dot.active {
+            background: var(--color-secondary);
+            transform: scale(1.3);
+        }
+
+        .form-group { margin-bottom: 1.25rem; }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--color-gray-600);
+            margin-bottom: 0.375rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1.5px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            color: var(--color-gray-800);
+            background: var(--color-gray-50);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--color-secondary);
+            box-shadow: 0 0 0 3px rgb(0 180 216 / 0.15);
+        }
+        input::placeholder { color: var(--color-gray-400); }
+        input.error, select.error {
+            border-color: #EF4444;
+            box-shadow: 0 0 0 3px rgb(239 68 68 / 0.1);
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748B' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 6l3.5 4 3.5-4z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            padding-right: 2.5rem;
+            cursor: pointer;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+        }
+        .btn:active { transform: scale(0.985); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary-light) 100%);
+            color: var(--color-white);
+            box-shadow: 0 4px 14px rgb(0 180 216 / 0.3);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgb(0 180 216 / 0.4);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 1rem;
+        }
+        .radio-option {
+            flex: 1;
+            position: relative;
+        }
+        .radio-option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .radio-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border: 1.5px solid var(--color-gray-200);
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-gray-600);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: none;
+            letter-spacing: normal;
+            margin-bottom: 0;
+        }
+        .radio-option input[type="radio"]:checked + .radio-label {
+            border-color: var(--color-secondary);
+            background: rgb(0 180 216 / 0.06);
+            color: var(--color-primary);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 1.25rem;
+            text-align: center;
+        }
+        .section-subtitle {
+            font-size: 0.8125rem;
+            color: var(--color-gray-500);
+            text-align: center;
+            margin-top: -0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        /* Results */
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        .result-card {
+            background: var(--color-gray-50);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid var(--color-gray-100);
+        }
+        .result-card .result-label {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--color-gray-500);
+            margin-bottom: 0.25rem;
+        }
+        .result-card .result-value {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        .result-card .result-unit {
+            font-size: 0.75rem;
+            color: var(--color-gray-400);
+        }
+
+        .recommendation {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            text-align: center;
+            margin-bottom: 1.25rem;
+        }
+        .recommendation .rec-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-accent);
+            margin-bottom: 0.375rem;
+        }
+        .recommendation .rec-value {
+            font-family: var(--font-display);
+            font-size: 1.375rem;
+            font-weight: 700;
+            color: var(--color-white);
+        }
+        .recommendation .rec-room {
+            font-size: 0.8125rem;
+            color: rgb(255 255 255 / 0.7);
+            margin-top: 0.25rem;
+        }
+
+        .site-assessment {
+            background: linear-gradient(135deg, var(--color-gold) 0%, #c49a45 100%);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem;
+            text-align: center;
+            margin-bottom: 1.25rem;
+            color: var(--color-white);
+        }
+        .site-assessment .rec-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgb(255 255 255 / 0.8);
+            margin-bottom: 0.375rem;
+        }
+        .site-assessment .rec-value {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        details {
+            border: 1px solid var(--color-gray-200);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        summary {
+            padding: 1rem 1.25rem;
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--color-primary);
+            cursor: pointer;
+            background: var(--color-gray-50);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        summary::-webkit-details-marker { display: none; }
+        summary::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid var(--color-gray-400);
+            border-bottom: 2px solid var(--color-gray-400);
+            transform: rotate(-45deg);
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+        details[open] summary::after {
+            transform: rotate(45deg);
+        }
+        details .details-content {
+            padding: 1rem 1.25rem;
+            font-size: 0.875rem;
+            color: var(--color-gray-600);
+            line-height: 1.7;
+            border-top: 1px solid var(--color-gray-200);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--color-primary);
+            border: 1.5px solid var(--color-gray-300);
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            border-color: var(--color-primary);
+            background: var(--color-gray-50);
+        }
+
+        .error-msg {
+            font-size: 0.75rem;
+            color: #EF4444;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        .error-msg.visible { display: block; }
+
+        .hidden { display: none !important; }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--color-gray-400);
+            margin-top: 1.5rem;
+            max-width: 520px;
+        }
+        .footer-note a {
+            color: var(--color-secondary);
+            text-decoration: none;
+        }
+        .footer-note a:hover { text-decoration: underline; }
+
+        @media (max-width: 480px) {
+            body { padding: 1rem 0.75rem; }
+            .card-body { padding: 1.25rem; }
+            .card-header { padding: 1.25rem; }
+            .card-header h1 { font-size: 1.25rem; }
+            .form-row-3 { grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; }
+            .result-grid { grid-template-columns: 1fr; gap: 0.5rem; }
+            .result-card { display: flex; align-items: center; justify-content: space-between; text-align: left; }
+            .result-card .result-label { margin-bottom: 0; }
+            .result-card .result-value { font-size: 1.25rem; }
+            .recommendation .rec-value { font-size: 1.125rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="brand">
+    <div class="brand-name">❄️ Chill Air</div>
+    <div class="brand-tagline">Canterbury's Trusted Heat Pump Specialists</div>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h1>Heat Pump Size Calculator</h1>
+        <p>Find the right unit for your Christchurch home</p>
+    </div>
+
+    <div class="card-body">
+        <div class="step-indicator">
+            <div class="step-dot active" id="dot1"></div>
+            <div class="step-dot" id="dot2"></div>
+            <div class="step-dot" id="dot3"></div>
+        </div>
+
+        <!-- Step 1: Calculator -->
+        <div id="step1">
+            <div class="form-group">
+                <label for="roomName">Room Name</label>
+                <input type="text" id="roomName" placeholder="e.g. Living Room">
+                <div class="error-msg" id="roomNameError">Please enter a room name</div>
+            </div>
+
+            <div class="form-group form-row-3">
+                <div>
+                    <label for="length">Length (m)</label>
+                    <input type="number" id="length" placeholder="0.0" step="0.1" min="0">
+                    <div class="error-msg" id="lengthError">Required</div>
+                </div>
+                <div>
+                    <label for="width">Width (m)</label>
+                    <input type="number" id="width" placeholder="0.0" step="0.1" min="0">
+                    <div class="error-msg" id="widthError">Required</div>
+                </div>
+                <div>
+                    <label for="height">Height (m)</label>
+                    <input type="number" id="height" placeholder="2.4" step="0.1" min="0">
+                    <div class="error-msg" id="heightError">Required</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="houseType">House Type</label>
+                <select id="houseType">
+                    <option value="new">New house (2016+)</option>
+                    <option value="old">Old house, cold/damp</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="insulation">Insulation Level</label>
+                <select id="insulation">
+                    <option value="good">Good</option>
+                    <option value="average">Average</option>
+                    <option value="poor">Poor</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary" onclick="handleCalculate()">Calculate</button>
+        </div>
+
+        <!-- Step 2: Lead Generation Form -->
+        <div id="step2" class="hidden">
+            <div class="section-title">Almost there!</div>
+            <div class="section-subtitle">Enter your details to see your results</div>
+
+            <div class="form-group">
+                <label for="contactName">Name</label>
+                <input type="text" id="contactName" placeholder="Your full name">
+                <div class="error-msg" id="contactNameError">Please enter your name</div>
+            </div>
+
+            <div class="form-group">
+                <label for="contactEmail">Email</label>
+                <input type="email" id="contactEmail" placeholder="you@example.co.nz">
+                <div class="error-msg" id="contactEmailError">Please enter a valid email</div>
+            </div>
+
+            <div class="form-group">
+                <label for="contactAddress">Address</label>
+                <input type="text" id="contactAddress" placeholder="Your street address, Christchurch">
+                <div class="error-msg" id="contactAddressError">Please enter your address</div>
+            </div>
+
+            <div class="form-group">
+                <label for="contactPhone">Phone Number</label>
+                <input type="tel" id="contactPhone" placeholder="021 123 4567">
+                <div class="error-msg" id="contactPhoneError">Please enter your phone number</div>
+            </div>
+
+            <div class="form-group">
+                <label>Would you like us to call you?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="callYes" name="callBack" value="yes">
+                        <label for="callYes" class="radio-label">Yes please</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="callNo" name="callBack" value="no" checked>
+                        <label for="callNo" class="radio-label">No thanks</label>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="handleSubmitContact()">See My Results</button>
+        </div>
+
+        <!-- Step 3: Results -->
+        <div id="step3" class="hidden">
+            <div class="section-title" id="resultsTitle">Your Results</div>
+
+            <div class="result-grid">
+                <div class="result-card">
+                    <div>
+                        <div class="result-label">Volume</div>
+                        <div class="result-value" id="resVolume">—</div>
+                        <div class="result-unit">m³</div>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div>
+                        <div class="result-label">Heating</div>
+                        <div class="result-value" id="resHeating">—</div>
+                        <div class="result-unit">kW</div>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <div>
+                        <div class="result-label">Cooling</div>
+                        <div class="result-value" id="resCooling">—</div>
+                        <div class="result-unit">kW</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="recommendationBox"></div>
+
+            <div id="detailsAccordion"></div>
+
+            <button class="btn btn-outline" onclick="handleReset()">Calculate Another Room</button>
+        </div>
+    </div>
+</div>
+
+<div class="footer-note">
+    Estimates based on typical Christchurch conditions. Actual requirements may vary.<br>
+    <a href="https://chillair.co.nz">chillair.co.nz</a> &middot; Canterbury's Heat Pump Specialists
+</div>
+
+<script>
+    const WATTAGE_MATRIX = {
+        new:  { good: { heat: 50, cool: 45 }, average: { heat: 55, cool: 50 }, poor: { heat: 60, cool: 55 } },
+        old:  { good: { heat: 55, cool: 45 }, average: { heat: 65, cool: 55 }, poor: { heat: 70, cool: 60 } }
+    };
+
+    const STANDARD_CAPACITIES = [2.5, 3.5, 5.0, 6.0, 7.1, 8.0, 9.0];
+
+    let calcResults = null;
+
+    function setStep(n) {
+        document.getElementById('step1').classList.toggle('hidden', n !== 1);
+        document.getElementById('step2').classList.toggle('hidden', n !== 2);
+        document.getElementById('step3').classList.toggle('hidden', n !== 3);
+        for (let i = 1; i <= 3; i++) {
+            document.getElementById('dot' + i).classList.toggle('active', i <= n);
+        }
+    }
+
+    function clearErrors() {
+        document.querySelectorAll('.error-msg').forEach(el => el.classList.remove('visible'));
+        document.querySelectorAll('input.error, select.error').forEach(el => el.classList.remove('error'));
+    }
+
+    function showError(inputId, msgId) {
+        document.getElementById(inputId).classList.add('error');
+        document.getElementById(msgId).classList.add('visible');
+    }
+
+    function matchUnit(heatingKW) {
+        for (const cap of STANDARD_CAPACITIES) {
+            if (cap >= heatingKW) return cap;
+        }
+        return null;
+    }
+
+    function handleCalculate() {
+        clearErrors();
+        let valid = true;
+
+        const roomName = document.getElementById('roomName').value.trim();
+        const length = parseFloat(document.getElementById('length').value);
+        const width = parseFloat(document.getElementById('width').value);
+        const height = parseFloat(document.getElementById('height').value);
+        const houseType = document.getElementById('houseType').value;
+        const insulation = document.getElementById('insulation').value;
+
+        if (!roomName) { showError('roomName', 'roomNameError'); valid = false; }
+        if (!length || length <= 0) { showError('length', 'lengthError'); valid = false; }
+        if (!width || width <= 0) { showError('width', 'widthError'); valid = false; }
+        if (!height || height <= 0) { showError('height', 'heightError'); valid = false; }
+
+        if (!valid) return;
+
+        const volume = length * width * height;
+        const watts = WATTAGE_MATRIX[houseType][insulation];
+        const heatingKW = (volume * watts.heat) / 1000;
+        const coolingKW = (volume * watts.cool) / 1000;
+        const unitSize = matchUnit(heatingKW);
+
+        calcResults = { roomName, volume, heatingKW, coolingKW, unitSize, houseType, insulation, length, width, height };
+
+        setStep(2);
+    }
+
+    function handleSubmitContact() {
+        clearErrors();
+        let valid = true;
+
+        const name = document.getElementById('contactName').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const address = document.getElementById('contactAddress').value.trim();
+        const phone = document.getElementById('contactPhone').value.trim();
+        const callBack = document.querySelector('input[name="callBack"]:checked').value;
+
+        if (!name) { showError('contactName', 'contactNameError'); valid = false; }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('contactEmail', 'contactEmailError'); valid = false; }
+        if (!address) { showError('contactAddress', 'contactAddressError'); valid = false; }
+        if (!phone) { showError('contactPhone', 'contactPhoneError'); valid = false; }
+
+        if (!valid) return;
+
+        const contactData = { name, email, address, phone, callBack, ...calcResults };
+        console.log('Lead captured:', contactData);
+
+        showResults();
+    }
+
+    function showResults() {
+        const { roomName, volume, heatingKW, coolingKW, unitSize } = calcResults;
+
+        document.getElementById('resultsTitle').textContent = roomName;
+        document.getElementById('resVolume').textContent = volume.toFixed(1);
+        document.getElementById('resHeating').textContent = heatingKW.toFixed(2);
+        document.getElementById('resCooling').textContent = coolingKW.toFixed(2);
+
+        const recBox = document.getElementById('recommendationBox');
+        if (unitSize) {
+            recBox.innerHTML =
+                '<div class="recommendation">' +
+                    '<div class="rec-label">Recommended Unit</div>' +
+                    '<div class="rec-value">' + unitSize.toFixed(1) + ' kW High Wall System</div>' +
+                    '<div class="rec-room">for ' + calcResults.roomName + '</div>' +
+                '</div>';
+        } else {
+            recBox.innerHTML =
+                '<div class="site-assessment">' +
+                    '<div class="rec-label">Recommendation</div>' +
+                    '<div class="rec-value">Site Assessment Required</div>' +
+                    '<div class="rec-room" style="margin-top:0.5rem;">Your room requires more than 9.0 kW — we recommend a free on-site assessment to find the best solution.</div>' +
+                '</div>';
+        }
+
+        const accordion = document.getElementById('detailsAccordion');
+        if (unitSize) {
+            accordion.innerHTML =
+                '<details>' +
+                    '<summary>Recommended: ' + unitSize.toFixed(1) + ' kW High Wall System</summary>' +
+                    '<div class="details-content">' +
+                        'Suitable brands include <strong>Mitsubishi Electric</strong>, <strong>Fujitsu</strong>, or <strong>Daikin</strong>. ' +
+                        'Chill Air can supply and install any of these brands with a full manufacturer warranty. ' +
+                        'The right model depends on your room layout and preferences — get in touch for a personalised quote.' +
+                    '</div>' +
+                '</details>';
+        } else {
+            accordion.innerHTML =
+                '<details>' +
+                    '<summary>Why a site assessment?</summary>' +
+                    '<div class="details-content">' +
+                        'Rooms requiring over 9.0 kW of heating may need a ducted system, multi-split configuration, or high-capacity floor console. ' +
+                        'A free on-site assessment lets us recommend the most efficient and cost-effective solution for your space.' +
+                    '</div>' +
+                '</details>';
+        }
+
+        setStep(3);
+    }
+
+    function handleReset() {
+        calcResults = null;
+        document.getElementById('roomName').value = '';
+        document.getElementById('length').value = '';
+        document.getElementById('width').value = '';
+        document.getElementById('height').value = '';
+        document.getElementById('houseType').selectedIndex = 0;
+        document.getElementById('insulation').selectedIndex = 0;
+        document.getElementById('contactName').value = '';
+        document.getElementById('contactEmail').value = '';
+        document.getElementById('contactAddress').value = '';
+        document.getElementById('contactPhone').value = '';
+        document.getElementById('callNo').checked = true;
+        clearErrors();
+        setStep(1);
+    }
+</script>
+
+</body>
+</html>
