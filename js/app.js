@@ -325,14 +325,14 @@ function initContactForm() {
     const form = document.getElementById('contact-form');
     if (!form) return;
 
-    form.onsubmit = function(e) {
+    form.onsubmit = async function(e) {
         e.preventDefault();
-        
+
         const formData = new FormData(form);
         const name = formData.get('name');
         const email = formData.get('email');
         const message = formData.get('message');
-        
+
         if (!name || !email || !message) {
             showNotification('Please fill in all required fields.', 'error');
             return;
@@ -344,8 +344,35 @@ function initContactForm() {
             return;
         }
 
-        showNotification('Thanks for your message! We\'ll be in touch soon.', 'success');
-        form.reset();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn ? submitBtn.textContent : '';
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+        }
+
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' },
+                body: formData
+            });
+            const data = await response.json();
+
+            if (data.success) {
+                showNotification('Thanks for your message! We\'ll be in touch soon.', 'success');
+                form.reset();
+            } else {
+                showNotification('Sorry, something went wrong. Please call us on 027 206 5345 to get in touch.', 'error');
+            }
+        } catch (err) {
+            showNotification('Sorry, something went wrong. Please call us on 027 206 5345 to get in touch.', 'error');
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            }
+        }
     };
 }
 
