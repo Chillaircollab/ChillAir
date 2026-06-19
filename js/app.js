@@ -383,15 +383,19 @@ function showNotification(message, type) {
 
     const notification = document.createElement('div');
     notification.className = 'notification notification--' + type;
-    notification.innerHTML = '<span>' + message + '</span><button onclick="this.parentElement.remove()">×</button>';
-    
+    notification.setAttribute('role', type === 'error' ? 'alert' : 'status');
+    notification.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
+    notification.innerHTML = '<span>' + message + '</span><button type="button" aria-label="Dismiss" onclick="this.parentElement.remove()">×</button>';
+
     document.body.appendChild(notification);
-    
+
+    // Success messages linger longer so the customer is sure it sent; errors stay until dismissed-ish
+    const timeout = type === 'error' ? 8000 : 6000;
     setTimeout(function() {
         if (notification.parentElement) {
             notification.remove();
         }
-    }, 5000);
+    }, timeout);
 }
 
 // ===== Smooth Scroll =====

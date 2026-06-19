@@ -1,5 +1,5 @@
 // Chill Air Service Worker
-const CACHE_NAME = 'chillair-v2';
+const CACHE_NAME = 'chillair-v3';
 const OFFLINE_URL = '/index.html';
 
 // Files to cache
