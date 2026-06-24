@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://chillair.co.nz/</loc>
-        <lastmod>2026-03-15</lastmod>
+        <lastmod>2026-06-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1.0</priority>
     </url>
@@ -47,6 +47,108 @@
         <lastmod>2026-06-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-halswell.html</loc>
+        <lastmod>2026-06-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-lincoln.html</loc>
+        <lastmod>2026-06-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-rolleston.html</loc>
+        <lastmod>2026-06-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-hornby.html</loc>
+        <lastmod>2026-06-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-prebbleton.html</loc>
+        <lastmod>2026-06-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-wigram.html</loc>
+        <lastmod>2026-06-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-rangiora.html</loc>
+        <lastmod>2026-06-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-kaiapoi.html</loc>
+        <lastmod>2026-06-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-spreydon.html</loc>
+        <lastmod>2026-06-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-cashmere.html</loc>
+        <lastmod>2026-06-22</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-riccarton.html</loc>
+        <lastmod>2026-06-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-papanui.html</loc>
+        <lastmod>2026-06-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-ilam.html</loc>
+        <lastmod>2026-06-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-linwood.html</loc>
+        <lastmod>2026-06-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/services/heat-pump-installation-sumner.html</loc>
+        <lastmod>2026-06-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/blog/</loc>
+        <lastmod>2026-06-21</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://chillair.co.nz/blog/heat-pump-cost-christchurch.html</loc>
+        <lastmod>2026-06-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://chillair.co.nz/privacy.html</loc>
